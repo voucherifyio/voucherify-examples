@@ -29,5 +29,8 @@
     "start": "node server/server.js",
     "dev": "nodemon server/server.js"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "node": "16.x"
+  }
 }
