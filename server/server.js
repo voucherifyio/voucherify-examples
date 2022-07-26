@@ -43,7 +43,7 @@ const checkCredentials = async () => {
 };
 checkCredentials();
 
-const port = process.env.PORT;
+const port = 3000;
 
 app.listen(port, () => {
     console.log(`Hot beans app listening on port ${port}`);
