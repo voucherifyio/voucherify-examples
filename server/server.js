@@ -60,4 +60,4 @@ getDefaultItemsFromVoucherCodeRedemption();
 validateVoucher();
 redeemVoucher();
 
-export { express, path, asyncHandler, __dirname, __filename, app };
+export { express, path, asyncHandler, app };
