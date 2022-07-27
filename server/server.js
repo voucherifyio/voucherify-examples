@@ -54,5 +54,3 @@ attachEndpointsStackingPromotions(app, client);
 
 accessToVoucherCodeRedemptionApp(app);
 attachEndpointsVoucherCodeRedemption(app, client);
-
-export { express, path, asyncHandler, app };
