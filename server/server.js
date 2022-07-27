@@ -52,5 +52,5 @@ app.listen(port, () => {
 accessToStackingPromotionsApp(app);
 attachEndpointsStackingPromotions(app, client);
 
-accessToVoucherCodeRedemptionApp(app);
-attachEndpointsVoucherCodeRedemption(app, client);
+// accessToVoucherCodeRedemptionApp(app);
+// attachEndpointsVoucherCodeRedemption(app, client);
