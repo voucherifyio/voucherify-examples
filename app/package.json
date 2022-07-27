@@ -1,4 +1,9 @@
 {
+  "private": "true",
+  "workspaces": [
+    "server",
+    "client"
+  ],
   "dependencies": {
     "@voucherify/sdk": "^2.0.4",
     "body-parser": "1.20.0",
@@ -33,9 +38,5 @@
   "type": "module",
   "engines": {
     "node": "16.x"
-  },
-  "workspaces": [
-    "server",
-    "client"
-  ]
+  }
 }
