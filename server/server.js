@@ -7,7 +7,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import express from "express";
 import bodyParser from "body-parser";
-import asyncHandler from "express-async-handler";
 const app = express();
 import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "../stacking-promotions/server/server.js";
 import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "../voucher-code-redemption/server/server.js";
