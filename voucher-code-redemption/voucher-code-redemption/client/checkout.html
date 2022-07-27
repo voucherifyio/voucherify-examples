@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Checkout view code redemption" />
+        <title>Checkout view</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./css/checkoutstyle.css" />
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <section class="personal-information">
+                <nav class="nav-wrapper">
+                    <img src="./images/black.svg" alt="Shop logo" class="shop-logo">
+                    <div class="nav-steps">
+                        <p class="underline">Cart</p>
+                        <span class="step-arrow"><img src="./images/smallrightarrow.svg" alt=""></span>
+                        <p class="personal-font">Personal information</p>
+                        <span class="step-arrow"><img src="./images/smallrightarrow.svg" alt=""></span>
+                        <p class="underline">Shipping</p>
+                        <span class="step-arrow"><img src="./images/smallrightarrow.svg" alt=""></span>
+                        <p class="underline">Payment</p>
+                    </div>
+                </nav>
+                <form class="shipping-form">
+                    <div class="contact-info">
+                        <div class="contact-info-title">
+                            <h5>Contact information</h5>
+                            <p>Already have an account? <span>Log in</span></p>
+                        </div>
+                        <label for="ephone">
+                            <input type="text" id="ephone" value="jacksmith@test.com">
+                        </label>
+                        <div class="contact-checkbox">
+                            <label for="news">
+                                <input type="checkbox" id="news">
+                            </label>
+                            <p>Keep me up to date on new and offers</p>
+                        </div>
+                    </div>
+                    <div class="adress-info">
+                        <h5>Shipping adress</h5>
+                        <label for="fullname">
+                            <input type="name" id="fullname" value="Jack Smith">
+                        </label>
+                        <label for="company">
+                            <input type="text" id="company" value="Voucherify">
+                        </label>
+                        <label for="adress">
+                            <input type="text" id="adress" value="Magic Street 10">
+                        </label>
+                        <div class="city-properties">
+                            <label for="postal">
+                                <input type="text" id="postal" value="11-130">
+                            </label>
+                            <label for="city">
+                                <input type="text" id="city" value="Katowice">
+                            </label>
+                        </div>
+                        <label for="countries" class="countries">
+                            <select id="countries">
+                                <option value="Poland">Poland</option>
+                                <option value="France">France</option>
+                                <option value="Spain">Spain</option>
+                            </select>
+                        </label>
+                        <div class="contact-checkbox">
+                            <label for="news">
+                                <input type="checkbox" id="news">
+                            </label>
+                            <p>Save this information for next time</p>
+                        </div>
+                    </div>
+                    <div class="nav-buttons">
+                        <button type="button">Complete order</button>
+                        <a href="index.html"><span><img src="./images/rightArrow.svg" alt="Return to cart"></span>Return to cart</a>
+                    </div>
+
+                </form>
+
+            </section>
+            <section class="checkout-view">
+                <div class="summed-products"></div>
+                <template class="summed-products-template">
+                    <div class="each-product">
+                        <img src="" />
+                        <div class="each-product-name">
+                            <h6></h6>
+                            <p></p>
+                        </div>
+                        <span></span>
+                    </div>
+                </template>
+                <div class="discounts"></div>
+                <template class="discounts-template">
+                    <div class="value-discounts">
+                        <p>Discount applied to cart</p>
+                    </div>
+                    <h5 class="coupon">
+                    </h5>
+                    <div class="discount-value">
+                        <p>Value</p>
+                        <span>0</span>
+                    </div>
+                    <div class="checkout-values">
+                        <div class="subtotal">
+                            <p>Subtotal</p>
+                            <span>0</span>
+                        </div>
+                        <div class="all-discounts">
+                            <p>All your discounts</p>
+                            <span>0</span>
+                        </div>
+                        <div class="shipping">
+                            <p>Shipping</p>
+                            <span>20</span>
+                        </div>
+                        <div class="grand-total">
+                            <p>Grand total</p>
+                            <span>0</span>
+                        </div>
+                    </div>
+                </template>
+            </section>
+        </div>
+        <script type="module" src="./js/checkout.js"></script>
+    </body>
+</html>

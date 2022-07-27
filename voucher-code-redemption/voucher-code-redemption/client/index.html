@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class='no-js' lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Voucher Code Redemption</title>
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <section data-component="navbar" class="navbar">
+      <img class="shop-logo" alt="shop logo" src="./images/black.svg" />
+      <ul class="navbar-list-holder">
+        <li class="list-item">Bestsellers</li>
+        <li class="list-item">Shop all</li>
+        <li class="list-item">% Sales</li>
+        <li class="list-item">Hi Mary</li>
+        <span class="shopping-cart"><img src="./images/shopping_cart.svg" alt="Shopping cart"></span>
+      </ul>
+    </section>
+    <h2>Your cart</h2>
+    <div class="cart-and-summary-holder">
+      <section
+        id="cart-summary"
+        class="cartSummary"
+        data-component="cartSummary"
+      >
+      <h2>Item summary</h2>
+      <div id="cart-summary-list">
+
+      </div>
+      </section>
+      <template id="cart-summary-row-template">
+        <div class='item'>
+          <img src='./images/johan2.jpeg' alt="product image"/>
+          <div class='name-and-description'>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="form-and-button-holder">
+            <button class='decrement' >-</button>
+            <form>
+            <input class='increment-input' type="number"/>
+            </form>
+            <button class='increment' >+</button>
+          </div>
+          <span class="price"></span>
+         </div>
+      </template>
+      <section class="orderSummary" data-component="orderSummary">
+        <h2>Order summary</h2>
+        <div id="total-order-holder"></div>
+        <template id="total-order-holder-template">
+          <h4>Subtotal<span id="subtotal">$135.85</span></h4>
+          <h4>Shipping<span>Calculated at next step</span></h4>
+          <h4>Coupon Codes:</h4>
+          <div class="voucher-examples">
+            <span>BLCKFRDY ($10.00)</span>
+            <span>FREE-SHIPPING (Free shipping)</span>
+          </div>
+          <div class="voucher-input-and-button-holder">
+            <form id="voucher-code-form">
+              <input
+                id="voucher-code"
+                type="text"
+                placeholder="Enter your code"
+              />
+              <button type="submit" id="check-voucher-code"><img src="./images/rightArrow.svg" alt="Right Arrow"></button>
+            </form>
+          </div>
+          <div class="voucher-form-error">
+            <p></p>
+          </div>
+          <div class="promotions-holder">
+            <h4>Promotions:</h4>
+            <div id="promotion-holder" class="promotion-holder"></div>
+            <div class="error-holder"></div>
+          </div>
+          <h4 class="discount-price-holder">
+            All Your Discounts:<span id="all-discounts">n/a</span>
+          </h4>
+          <h4>Grand total:<span id="grand-total">$135.85</span></h4>
+        </template>
+        <button id="checkout-button" class="checkout-button">Checkout</button>
+      </section>
+    </div>
+
+    <footer data-component="footer" class="footer">
+      <div class="footer-left-holder">
+        <img
+          class="footer-shop-logo"
+          src="./images/black.svg"
+          alt="footer-shop-logo"
+        />
+        <form>
+          <label for="email">Sign up for offers and more</label>
+          <div class="email-wrapper">
+            <input
+            class="email-input"
+              type="email"
+              placeholder="Enter your email here"
+            />
+            <button class="check-button"><img src="./images/rightArrow.svg" alt="Right Arrow"></button>
+          </div>
+        </form>
+        <div class="social-media-icons">
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+        <!-- <p class="copyright-holder">© 2022 voucherify</p> -->
+      </div>
+      <div class="footer-right-holder">
+        <ul>
+          <li>Discover</li>
+          <li>Bestsellers</li>
+          <li>Shop all</li>
+          <li class="sales">% Sales</li>
+        </ul>
+        <ul>
+          <li>About</li>
+          <li>Help Center</li>
+          <li>Shipping/Return</li>
+          <li>Affiliates</li>
+        </ul>
+        <ul>
+          <li>Legal</li>
+          <li>Contact</li>
+          <li>Privacy Policies</li>
+          <li>Terms & Conditions</li>
+        </ul>
+      </div>
+      <div class="product-info">
+        <p class="copyright-holder">© 2022 voucherify</p>
+        <a id="repo-link" target="_blank" href="https://github.com/voucherify-samples/voucher-code-redemption">https://github.com/voucherify-samples/voucher-code-redemption</a>
+      </div>
+    </footer>
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>
