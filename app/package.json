@@ -24,6 +24,7 @@
       "git add"
     ]
   },
+  "main": "server.js",
   "scripts": {
     "prepare": "husky install",
     "start": "node server/server.js",
