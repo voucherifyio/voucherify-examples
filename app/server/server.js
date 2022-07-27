@@ -11,6 +11,7 @@ import asyncHandler from "express-async-handler";
 const app = express();
 import { validatePromotion, validateStackable, redeemStackable, accessToStackingPromotionsApp, getDefaultItemsFromStackingPromotions } from "../../app/stacking-promotions/server/server.js";
 import { validateVoucher, redeemVoucher, accessToVoucherCodeRedemptionApp, getDefaultItemsFromVoucherCodeRedemption } from "../../app/voucher-code-redemption/server/server.js";
+
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
     secretKey    : `${process.env.VOUCHERIFY_SECRET_KEY}`,
@@ -42,9 +43,9 @@ const checkCredentials = async () => {
 };
 checkCredentials();
 
-const port = 3000;
+const port = process.env.PORT;
 
-app.listen(port, () => {
+app.listen(port || 3000, () => {
     console.log(`Hot beans app listening on port ${port}`);
 });
 
