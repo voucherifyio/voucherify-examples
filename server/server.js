@@ -9,8 +9,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import asyncHandler from "express-async-handler";
 const app = express();
-import { accessToStackingPromotionsApp, attachEndpoints } from "../stacking-promotions/server/server.js";
-import { validateVoucher, redeemVoucher, accessToVoucherCodeRedemptionApp, getDefaultItemsFromVoucherCodeRedemption } from "../voucher-code-redemption/server/server.js";
+import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "../stacking-promotions/server/server.js";
+import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "../voucher-code-redemption/server/server.js";
 
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
@@ -49,12 +49,10 @@ app.listen(port, () => {
     console.log(`Hot beans app listening on port ${port}`);
 });
 
-accessToStackingPromotionsApp(app, express);
-attachEndpoints(app, client);
+accessToStackingPromotionsApp(app);
+attachEndpointsStackingPromotions(app, client);
 
-accessToVoucherCodeRedemptionApp();
-getDefaultItemsFromVoucherCodeRedemption();
-validateVoucher();
-redeemVoucher();
+accessToVoucherCodeRedemptionApp(app);
+attachEndpointsVoucherCodeRedemption(app, client);
 
 export { express, path, asyncHandler, app };
