@@ -17,7 +17,7 @@ This example introduce an online coffee shop and many vouchers in your dashboard
 ## Demo <a id="demo"></a>
 
 Live demo on:<br>
-[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://v-voucher-code-redemption.herokuapp.com/)
+[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://voucherify-examples.herokuapp.com/stacking-promotions/)
 
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
 
