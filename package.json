@@ -6,7 +6,8 @@
     "express": "4.17.3",
     "express-async-handler": "^1.2.0",
     "nodemon": "^2.0.15",
-    "serve": "^13.0.2"
+    "serve": "^13.0.2",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "eslint": "^8.14.0",
