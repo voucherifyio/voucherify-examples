@@ -19,7 +19,7 @@ Check out all our examples in one place!
 [<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://v-voucher-code-redemption.herokuapp.com/)
 
 ## Quickstart <a id="quickstart"></a>
-Before you run these examples locally let's check how to started with Voucherify API and dashboard by redeeming your first coupon code by going to [Quickstart](https://docs.voucherify.io/docs/quickstart). This informations helps you understand conception about Voucherify product.
+Before you run these examples locally let's check how to start with Voucherify API and dashboard by redeeming your first coupon code by going to [Quickstart](https://docs.voucherify.io/docs/quickstart). This information helps you understand the conception of the Voucherify product.
 
 ## How to run Voucherify samples locally? <a id="voucherify-locally"></a>
 
