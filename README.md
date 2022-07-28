@@ -30,7 +30,7 @@ Follow the steps below to run locally.
 1. Clone repository.
 
 ```
-git clone https://github.com/voucherify-samples/voucherify-examples.git
+git clone https://github.com/voucherifyio/voucherify-examples.git
 ```
 2. Create your [Voucherify account](http://app.voucherify.io/#/signup) (free tier, no credit card required).
 
