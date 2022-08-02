@@ -19,7 +19,7 @@ getCartAndVoucherFromSessionStorage().then(data => {
 const fetchRedeemVoucher = async (code, products, name, email) => {
     try {
         const { items } = filterAndReduceProducts(products);
-        const response = await fetch("/redeem-voucher", {
+        const response = await fetch("/voucher-code-redemption/redeem-voucher", {
             method : "POST",
             headers: {
                 "Accept"      : "application/json",

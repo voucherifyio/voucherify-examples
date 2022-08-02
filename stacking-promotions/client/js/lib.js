@@ -151,7 +151,7 @@ export const filterAndReduceProducts = products => {
 };
 
 export const getDefaultItemsNameAndPrice = async () => {
-    const response = await fetch("/default-items", {
+    const response = await fetch("/stacking-promotions/default-items", {
         method : "GET",
         headers: {
             "Accept"      : "application/json",
@@ -163,8 +163,8 @@ export const getDefaultItemsNameAndPrice = async () => {
 };
 
 export const getCartAndVoucherFromSessionStorage = async () => {
-    const productsFromSessionStorage = JSON.parse(sessionStorage.getItem("products") || "[]");
-    const voucherPropertiesFromSessionStorage = JSON.parse(sessionStorage.getItem("voucherProperties") || "{}");
+    const productsFromSessionStorage = JSON.parse(sessionStorage.getItem("sp-products") || "[]");
+    const voucherPropertiesFromSessionStorage = JSON.parse(sessionStorage.getItem("sp-voucherProperties") || "{}");
     const data = await getDefaultItemsNameAndPrice();
     return {
         products         : productsFromSessionStorage.length ? productsFromSessionStorage : data,
@@ -176,6 +176,6 @@ export const getCartAndVoucherFromSessionStorage = async () => {
 };
 
 export const saveCartAndVoucherInSessionStorage = (items, voucherProperties) => {
-    window.sessionStorage.setItem("products", JSON.stringify(items));
-    window.sessionStorage.setItem("voucherProperties", JSON.stringify(voucherProperties));
+    window.sessionStorage.setItem("sp-products", JSON.stringify(items));
+    window.sessionStorage.setItem("sp-voucherProperties", JSON.stringify(voucherProperties));
 };

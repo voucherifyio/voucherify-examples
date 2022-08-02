@@ -22,11 +22,11 @@ const promotionStackableObj = {
 };
 
 export const attachEndpointsStackingPromotions = (app, client) => {
-    app.get("/default-items", (req, res) => {
+    app.get("/stacking-promotions/default-items", (req, res) => {
         return res.status(200).send(defaultItems);
     });
 
-    app.post("/validate-promotion", asyncHandler(async (req, res) => {
+    app.post("/stacking-promotions/validate-promotion", asyncHandler(async (req, res) => {
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
 
@@ -38,7 +38,7 @@ export const attachEndpointsStackingPromotions = (app, client) => {
         return res.status(200).send(hotPromotion);
     }));
 
-    app.post("/validate-stackable", asyncHandler(async (req, res) => {
+    app.post("/stacking-promotions/validate-stackable", asyncHandler(async (req, res) => {
         const vouchersArray = req.body.vouchersArray;
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
@@ -74,7 +74,7 @@ export const attachEndpointsStackingPromotions = (app, client) => {
         }
     }));
 
-    app.post("/redeem-stackable", asyncHandler(async (req, res) => {
+    app.post("/stacking-promotions/redeem-stackable", asyncHandler(async (req, res) => {
         const vouchersArray = req.body.vouchersArray;
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);

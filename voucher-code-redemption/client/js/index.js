@@ -65,7 +65,7 @@ const validateAndUpdateVoucherProperties = async (code, products) => {
         throw new Error("No items in basket");
     }
     const { items } = filterAndReduceProducts(products);
-    const response = await fetch("/validate-voucher", {
+    const response = await fetch("/voucher-code-redemption/validate-voucher", {
         method : "POST",
         headers: {
             "Accept"      : "application/json",

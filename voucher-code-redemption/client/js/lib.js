@@ -119,7 +119,7 @@ export const filterAndReduceProducts = products => {
 };
 
 export const getDefaultItemsNameAndPrice = async () => {
-    const response = await fetch("/get-default-items", {
+    const response = await fetch("/voucher-code-redemption/get-default-items", {
         method : "GET",
         headers: {
             "Accept"      : "application/json",
@@ -131,8 +131,8 @@ export const getDefaultItemsNameAndPrice = async () => {
 };
 
 export const getCartAndVoucherFromSessionStorage = async () => {
-    const productsFromSessionStorage = JSON.parse(sessionStorage.getItem("products") || "[]");
-    const voucherPropertiesFromSessionStorage = JSON.parse(sessionStorage.getItem("voucherProperties") || "{}");
+    const productsFromSessionStorage = JSON.parse(sessionStorage.getItem("vcr-products") || "[]");
+    const voucherPropertiesFromSessionStorage = JSON.parse(sessionStorage.getItem("vcr-voucherProperties") || "{}");
     const data = await getDefaultItemsNameAndPrice();
     return {
         products         : productsFromSessionStorage.length ? productsFromSessionStorage : data,
@@ -145,6 +145,6 @@ export const getCartAndVoucherFromSessionStorage = async () => {
 };
 
 export const saveCartAndVoucherInSessioStorage = (items, voucherProperties) => {
-    window.sessionStorage.setItem("products", JSON.stringify(items));
-    window.sessionStorage.setItem("voucherProperties", JSON.stringify(voucherProperties));
+    window.sessionStorage.setItem("vcr-products", JSON.stringify(items));
+    window.sessionStorage.setItem("vcr-voucherProperties", JSON.stringify(voucherProperties));
 };
