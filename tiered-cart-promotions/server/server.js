@@ -14,10 +14,69 @@ const customer = {
 };
 
 export const attachEndpointsTieredCartPromotions = (app, client) => {
-    app.get("/default-items", (req, res) => {
+    app.get("/tiered-cart-promotions/default-items", (req, res) => {
         return res.status(200).send(defaultItems);
     });
+
+    app.post("/tiered-cart-promotions/validate-promotion", asyncHandler(async (req, res) => {
+        const products = req.body.items;
+        const items = mapInputIntoKnownProducts(products);
+
+        const { promotions } = await client.promotions.validate({ customer: customer, order: { amount: calculateCartTotalAmount(items), items: items } });
+        const rewardPromotion = promotions.filter(campaign => campaign.name.startsWith("Reward Promotion"));
+
+        return res.status(200).send(rewardPromotion);
+
+    }));
+
+    app.post("/tiered-cart-promotions/redeem-stackable", asyncHandler(async (req, res) => {
+        const products = req.body.items;
+        const rewards = req.body.rewards;
+        const items = mapInputIntoKnownProducts(products);
+        const rewardsStackableArray = {
+            order: {
+                amount: null
+            },
+            redeemables: []
+        };
+        rewardsStackableArray.order.amount = calculateCartTotalAmount(items);
+        rewardsStackableArray.redeemables = filterRewardsToRedeem(rewards);
+
+        const { redemptions } = await client.redemptions.redeemStackable(rewardsStackableArray);
+        if (!redemptions.length) {
+            return res.status(400).send({
+                status : "error",
+                message: "Redeem rewards is not possible"
+            });
+        }
+
+        return res.status(200).send({
+            status : "success",
+            message: "Rewards redeemed"
+        });
+    }));
 };
+
+const filterRewardsToRedeem = rewards => {
+    return rewards.map(reward => {
+        return {
+            id    : reward.id,
+            object: reward.object
+        };
+    });
+};
+
+const mapInputIntoKnownProducts = requestedCart => {
+    return requestedCart.map(requestedItem => {
+        const item = defaultItems.find(item => requestedItem?.id && item.id === requestedItem.id);
+        if (!item) {
+            return false;
+        }
+        return { ...item, quantity: requestedItem.quantity || 0 };
+    }).filter(item => !!item && item.quantity);
+};
+
+const calculateCartTotalAmount = items => items.reduce((sum, item) => sum + (item.price * item.quantity) * 100, 0).toFixed(2);
 
 const defaultItems = [
     {
