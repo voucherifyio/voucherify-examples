@@ -1,12 +1,12 @@
 import path from "path";
 import { fileURLToPath } from "url";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 import asyncHandler from "express-async-handler";
 import express from "express";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const accessToVoucherCodeRedemptionApp = app => {
-    app.use("/voucher-code-redemption", express.static(path.join(__dirname, "../client")));
+    app.use("/voucher-code-redemption", express.static(path.join(__dirname, "./public")));
 };
 
 export const attachEndpointsVoucherCodeRedemption = (app, client) => {

@@ -27,8 +27,8 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "start": "node server/server.js",
-    "dev": "nodemon server/server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "type": "module",
   "engines": {

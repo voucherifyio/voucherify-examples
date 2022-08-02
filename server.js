@@ -1,16 +1,16 @@
+import express from "express";
+import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "./stacking-promotions/server.js";
+import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "./voucher-code-redemption/server.js";
+import { accessTotieredPromotionsApp, attachEndpointsTieredCartPromotions } from "./tiered-cart-promotions/server.js";
+import { fileURLToPath } from "url";
 import "dotenv/config";
 import pkg from "@voucherify/sdk";
-const { VoucherifyServerSide } = pkg;
 import path from "path";
-import { fileURLToPath } from "url";
+import bodyParser from "body-parser";
+const { VoucherifyServerSide } = pkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import express from "express";
-import bodyParser from "body-parser";
 const app = express();
-import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "../stacking-promotions/server/server.js";
-import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "../voucher-code-redemption/server/server.js";
-import { accessTotieredPromotionsApp, attachEndpointsTieredCartPromotions } from "../tiered-cart-promotions/server/server.js";
 
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
@@ -21,7 +21,7 @@ export const client = VoucherifyServerSide({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "./welcome-screen")));
 
 app.use((req, res, next) => {
     res.append("Access-Control-Allow-Origin", [ "*" ]);

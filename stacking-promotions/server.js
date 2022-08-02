@@ -1,12 +1,12 @@
 import path from "path";
 import { fileURLToPath } from "url";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 import asyncHandler from "express-async-handler";
 import express from "express";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const accessToStackingPromotionsApp = app => {
-    app.use("/stacking-promotions", express.static(path.join(__dirname, "../client")));
+    app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
 };
 
 const customer = {
