@@ -10,6 +10,7 @@ import bodyParser from "body-parser";
 const app = express();
 import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "../stacking-promotions/server/server.js";
 import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "../voucher-code-redemption/server/server.js";
+import { accessTotieredPromotionsApp, attachEndpointsTieredCartPromotions } from "../tiered-cart-promotions/server/server.js";
 
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
@@ -53,3 +54,6 @@ attachEndpointsStackingPromotions(app, client);
 
 accessToVoucherCodeRedemptionApp(app);
 attachEndpointsVoucherCodeRedemption(app, client);
+
+accessTotieredPromotionsApp(app);
+attachEndpointsTieredCartPromotions(app, client);
