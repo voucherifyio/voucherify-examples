@@ -62,6 +62,15 @@ html {
     height: 30px;
 }
 
+.welcome-page {
+  display: flex;
+  padding: 0 20px 0;
+}
+
+.welcome-page a {
+  text-decoration: none;
+}
+
 .cartSummary {
   width: 100%;
   display: flex;

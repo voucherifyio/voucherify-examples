@@ -64,7 +64,7 @@ const validateAndRenderSummaryAndProductCards = async (voucherProperties, produc
 const checkPromotionTier = async products => {
     state.voucherProperties.redeemables = filterPromotionTierFromVouchers(state.voucherProperties);
     const { items } = filterAndReduceProducts(products);
-    const response = await fetch("/validate-promotion", {
+    const response = await fetch("/stacking-promotions/validate-promotion", {
         method : "POST",
         headers: {
             "Accept"      : "application/json",
@@ -85,7 +85,7 @@ const validateAndUpdateVoucherProperties = async (voucherProperties, products) =
         return;
     }
     const { items } = filterAndReduceProducts(products);
-    const response = await fetch("/validate-stackable", {
+    const response = await fetch("/stacking-promotions/validate-stackable", {
         method : "POST",
         headers: {
             "Accept"      : "application/json",

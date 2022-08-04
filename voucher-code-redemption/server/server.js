@@ -10,11 +10,11 @@ export const accessToVoucherCodeRedemptionApp = app => {
 };
 
 export const attachEndpointsVoucherCodeRedemption = (app, client) => {
-    app.get("/get-default-items", (req, res) => {
+    app.get("/voucher-code-redemption/get-default-items", (req, res) => {
         return res.status(200).send(defaultItems);
     });
 
-    app.post("/validate-voucher", asyncHandler(async (req, res) => {
+    app.post("/voucher-code-redemption/validate-voucher", asyncHandler(async (req, res) => {
         const voucherCode = req.body.code;
         const products = req.body.items;
         const items = validateRequestedCart(products);
@@ -47,7 +47,7 @@ export const attachEndpointsVoucherCodeRedemption = (app, client) => {
         });
     }));
 
-    app.post("/redeem-voucher", asyncHandler(async (req, res) => {
+    app.post("/voucher-code-redemption/redeem-voucher", asyncHandler(async (req, res) => {
         const voucherCode = req.body.code;
         const products = req.body.items;
         const name = req.body.name;

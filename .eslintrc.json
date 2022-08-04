@@ -86,7 +86,7 @@
         "curly": "error",
         "dot-location": ["error", "property"],
         "no-empty-function": "error",
-        "no-magic-numbers": [ "error", { "ignore": [0,1, 2, -1, 20, 100, 200, 400, 401, 404, 1000, 1500, 5000, 8080], "enforceConst": true }],
+        "no-magic-numbers": [ "error", { "ignore": [-1, 0,1, 2, 3, 20, 100, 200, 400, 401, 404, 1000, 1500, 5000, 8080], "enforceConst": true }],
         "no-multi-spaces": "error",
         "no-multi-str": "error",
         "no-return-assign": "error",

@@ -43,33 +43,46 @@ export const getCartPreviewRender = ({ onIncrement, onDecrement }) => {
     return render;
 };
 
-export const getOrderSummaryRender = ({ onVoucherCodeSubmit }) => {
-    const render = (items, voucherProperties) => {
+export const getOrderSummaryRender = () => {
+    const render = (items, rewards) => {
         const htmlElement = document.getElementById("total-order-holder");
         const holderOrderHtmlElement = document.getElementById("total-order-holder-template");
         const template = holderOrderHtmlElement.cloneNode(true).content;
         const totalAmount = sumProductPrices(items);
-        const totalDiscountAmount = voucherProperties.redeemables.reduce((sum, voucher) => sum + voucher.discount, 0) / 100 || 0;
+        const totalDiscountAmount = rewards.reduce((sum, voucher) => sum + voucher.discount, 0) / 100 || 0;
         const finalPrice = totalAmount - totalDiscountAmount;
-        voucherProperties?.redeemables?.map(voucher => {
-            template.querySelector(".promotions-holder").innerHTML += `<div class="promotion-holder" index=${voucher.id}><h5>${voucher.object === "promotion_tier" ? voucher.object : voucher.id}</h5>
-            <div>$${(voucher.discount / 100).toFixed(2)}</div></div>`;
+        rewards?.map(reward => {
+            template.querySelector(".promotions-holder").innerHTML += `<div class="promotion-holder" index=${reward.hierarchy}><h5>Reward Tier ${reward.hierarchy}</h5>
+            <div>$${(reward.discount / 100).toFixed(2)}</div></div>`;
         });
         template.getElementById("subtotal").innerHTML = `$${totalAmount}`;
         template.getElementById("grand-total").innerHTML = `$${finalPrice <= 0 ? "0.00" : finalPrice.toFixed(2)}`;
         template.getElementById("all-discounts").innerHTML = totalDiscountAmount ? `$${totalDiscountAmount.toFixed(2)}` : "n/a";
-        const voucherValue = template.getElementById("voucher-code");
         template.getElementById("voucher-code-form").addEventListener("submit", event => {
             event.preventDefault();
-            if (typeof onVoucherCodeSubmit === "function") {
-                const voucher = voucherValue.value && voucherProperties.redeemables.push({ object: "voucher", id: voucherValue.value.trim() });
-                onVoucherCodeSubmit(voucher, render);
-            }
         });
         htmlElement.replaceChildren(template);
         return template;
     };
     return render;
+};
+
+export const getRewardsRender = () => {
+    const renderRewards = rewards => {
+        const rewardsHtmlElement = document.getElementById("reward-wrapper");
+        const rewardsTemplate = document.getElementById("reward-wrapper-template");
+        const rewardItem = rewardsTemplate.cloneNode(true).content;
+        const progressTier = rewardItem.querySelector(".progress-tier");
+        const rect = document.querySelectorAll(".progress-bar-numbers span")[rewards[0]?.hierarchy]?.getBoundingClientRect().left;
+        progressTier.style.width = `${((rect - 20).toFixed(1))}px`;
+        rewardItem.querySelector(".reward-banner").innerHTML = rewards[0]?.hierarchy !== 3 ? rewards[0]?.banner || "Spend $100 more to get FREE SHIPPING" : "Congratulations, you achieved all rewards!";
+        rewards?.map(reward => {
+            rewardItem.querySelectorAll(".reward-titles p > img")[reward?.hierarchy - 1].src="../images/reward-achieved.svg";
+        });
+        rewardsHtmlElement.replaceChildren(rewardItem);
+        return rewardItem;
+    };
+    return renderRewards;
 };
 
 export const renderProducts = products => {
@@ -86,54 +99,32 @@ export const renderProducts = products => {
     }));
 };
 
-export const renderVoucherPropertiesFromStorage = (voucherProperties, products) => {
+export const renderRewardsFromStorage = (rewards, products) => {
     const htmlElement = document.querySelector(".discounts");
     const discountsHtmlElement = document.querySelector(".discounts-template");
     const discountsTemplate = discountsHtmlElement.cloneNode(true).content;
-    const summedDiscountPrice = voucherProperties.redeemables.reduce((sum, voucher) => sum + voucher.discount, 0) / 100;
+    const summedDiscountPrice = rewards?.reduce((sum, voucher) => sum + voucher.discount, 0) / 100;
     const subtotal = sumProductPrices(products);
     const discountValue = discountsTemplate.querySelector(".discount-value span").innerHTML = `$${summedDiscountPrice || 0}`;
     discountsTemplate.querySelector(".all-discounts span").innerHTML = `$${summedDiscountPrice || 0}`;
     discountsTemplate.querySelector(".subtotal span").innerHTML = `$${subtotal}`;
-    voucherProperties?.redeemables?.map(voucher => {
-        discountsTemplate.querySelector(".coupons").innerHTML += `<h5 class="coupon"><span class="coupon-value">${voucher.object === "promotion_tier" ? voucher.object : voucher.id}</span></h5>`;
+    rewards?.map(reward => {
+        discountsTemplate.querySelector(".coupons").innerHTML += `<h5 class="coupon"><span class="coupon-value">Reward Tier ${reward.hierarchy}</span></h5>`;
     });
-    const shipping = discountsTemplate.querySelector(".shipping span").innerHTML = "$8.99";
-    discountsTemplate.querySelector(".grand-total span").innerHTML = `$${(+shipping.replace("$", "") + +subtotal - discountValue.replace("$", "")).toFixed(2)}`;
+    const shippingPrice = 8.99;
+    discountsTemplate.querySelector(".shipping span").innerHTML = `$${shippingPrice}`;
+    discountsTemplate.querySelector(".grand-total span").innerHTML = `$${(shippingPrice + +subtotal - discountValue.replace("$", "")).toFixed(2)}`;
     htmlElement.replaceChildren(discountsTemplate);
     return discountsTemplate;
 };
 
-export const displayErrorMessage = (message, voucherValue) => {
-    if (!voucherValue) {
-        document.querySelector(".voucher-form-error p").innerHTML = `${message}`;
-        return false;
-    }
+export const displayErrorMessage = message => {
     document.querySelector(".voucher-form-error p").innerHTML = "";
     document.querySelector(".error-holder").innerHTML = `<h5 id="error-message">${message}</h5>`;
     document.getElementById("voucher-code-form").addEventListener("submit", event => {
         event.preventDefault();
     });
     return false;
-};
-
-export const validateInput = (products, voucherValue) => {
-    if (!voucherValue) {
-        throw new Error("Please enter voucher code");
-    }
-    if (products.reduce((a, b) => a + b.quantity, 0) <= 0) {
-        throw new Error("No items in basket");
-    }
-};
-
-export const updateVoucherPropertiesState = (voucherProperties, amount, redeemables) => {
-    voucherProperties.amount = amount;
-    voucherProperties.redeemables = redeemables.map(item => { return { object: item.object, id: item.id, discount: item.order.total_applied_discount_amount }; })
-        .filter(voucher => voucher.discount !== 0);
-};
-
-export const filterPromotionTierFromVouchers = voucherProperties => {
-    return voucherProperties.redeemables.filter(voucher => voucher.object !== "promotion_tier");
 };
 
 export const sumProductPrices = items => {
@@ -151,7 +142,7 @@ export const filterAndReduceProducts = products => {
 };
 
 export const getDefaultItemsNameAndPrice = async () => {
-    const response = await fetch("/stacking-promotions/default-items", {
+    const response = await fetch("/tiered-cart-promotions/default-items", {
         method : "GET",
         headers: {
             "Accept"      : "application/json",
@@ -163,19 +154,16 @@ export const getDefaultItemsNameAndPrice = async () => {
 };
 
 export const getCartAndVoucherFromSessionStorage = async () => {
-    const productsFromSessionStorage = JSON.parse(sessionStorage.getItem("sp-products") || "[]");
-    const voucherPropertiesFromSessionStorage = JSON.parse(sessionStorage.getItem("sp-voucherProperties") || "{}");
+    const productsFromSessionStorage = JSON.parse(sessionStorage.getItem("tcp-products") || "[]");
+    const rewardsFromSessionStorage = JSON.parse(sessionStorage.getItem("tcp-rewards") || "[]");
     const data = await getDefaultItemsNameAndPrice();
     return {
-        products         : productsFromSessionStorage.length ? productsFromSessionStorage : data,
-        voucherProperties: voucherPropertiesFromSessionStorage.redeemables ? voucherPropertiesFromSessionStorage : {
-            amount     : "",
-            redeemables: []
-        }
+        products: productsFromSessionStorage.length ? productsFromSessionStorage : data,
+        rewards : rewardsFromSessionStorage.length ? rewardsFromSessionStorage : []
     };
 };
 
-export const saveCartAndVoucherInSessionStorage = (items, voucherProperties) => {
-    window.sessionStorage.setItem("sp-products", JSON.stringify(items));
-    window.sessionStorage.setItem("sp-voucherProperties", JSON.stringify(voucherProperties));
+export const saveCartAndVoucherInSessionStorage = (items, rewards) => {
+    window.sessionStorage.setItem("tcp-products", JSON.stringify(items));
+    window.sessionStorage.setItem("tcp-rewards", JSON.stringify(rewards));
 };

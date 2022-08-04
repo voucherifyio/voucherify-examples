@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Voucherify Examples</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <h1>Voucherify Examples</h1>
-    <div class="projects-wrapper">
-      <div class="project">
-        <img class="v-logo" src="./images/Group.svg" alt="Logo Voucherify" />
-        <a href="/voucher-code-redemption/">Voucher code redemption</a>
-        <div class="project-description">
-          This sample shows you how to integrate with Voucherify voucher
-          redemption endpoint. Validating and accepting promo codes in your
-          checkout from scratch might be tricky — calculating discounted prices,
-          error message handling, and localization are just a few things to
-          think about when building a simple promo code redemption flow.
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Voucherify Examples</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <h1>Voucherify Examples</h1>
+        <div class="projects-wrapper">
+            <a class="linkTo" href="/voucher-code-redemption/">
+            <div class="project">
+                <img
+                    class="v-logo"
+                    src="./images/Group.svg"
+                    alt="Logo Voucherify"
+                />
+                <p>Voucher code redemption</p>
+                <div class="project-description">
+                    This sample shows you how to integrate with Voucherify
+                    voucher redemption endpoint. Validating and accepting promo
+                    codes in your checkout from scratch might be tricky —
+                    calculating discounted prices, error message handling, and
+                    localization are just a few things to think about when
+                    building a simple promo code redemption flow.
+                </div>
+            </div>
+        </a>
+        <a class="linkTo" href="/stacking-promotions/">
+            <div class="project">
+                <img
+                    class="v-logo"
+                    src="./images/Group.svg"
+                    alt="Logo Voucherify"
+                />
+                <p>Stacking promotions</p>
+                <div class="project-description">
+                    This sample shows you how to stack different types of
+                    promotions with Voucherify. This is achieved by integrating
+                    validate stackable and redeem stackable endpoints. The
+                    stacking mechanism allows you to combine up to 5 promo codes
+                    or cart-level promotions with a single request.
+                </div>
+            </div>
+        </a>
+        <a class="linkTo" href="/tiered-cart-promotions/">
+            <div class="project">
+                <img
+                    class="v-logo"
+                    src="./images/Group.svg"
+                    alt="Logo Voucherify"
+                />
+                <p>Tiered cart promotions</p>
+                <div class="project-description">
+                    This sample shows how we can reward our customers by adding
+                    rewards for more money spent. We can achieve that solution
+                    thanks validate promotion endpoint. At the end we should use
+                    redeem endpoint like in the older examples.
+                </div>
+            </div>
+        </a>
         </div>
-      </div>
-      <div class="project">
-        <img class="v-logo" src="./images/Group.svg" alt="Logo Voucherify" />
-        <a href="/stacking-promotions/">Stacking promotions</a>
-        <div class="project-description">
-          This sample shows you how to stack different types of promotions with
-          Voucherify. This is achieved by integrating validate stackable and
-          redeem stackable endpoints. The stacking mechanism allows you to
-          combine up to 5 promo codes or cart-level promotions with a single
-          request.
-        </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>

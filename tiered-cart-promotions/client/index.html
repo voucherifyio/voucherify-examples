@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Voucher Code Redemption</title>
+    <title>Cart tiered promotions</title>
     <meta name="description" content="" />
     <meta
       name="viewport"
@@ -34,71 +34,98 @@
     </div>
     <h2>Your cart</h2>
     <div class="cart-and-summary-holder">
-      <section
+      <div class="cart-and-reward-wrapper">
+        <h4>Item Summary (4) </h4>
+        <div class="reward-wrapper" id="reward-wrapper"></div>
+        <template id="reward-wrapper-template">
+          <div class="reward-titles">
+            <h4>REWARDS</h4>
+            <p><img src="./images/blocked-icon.svg">FREE SHIPPING</p>
+            <p><img src="./images/blocked-icon.svg">3%</p>
+            <p><img src="./images/blocked-icon.svg">6%</p>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-numbers">
+              <span>0</span>
+              <span>100</span>
+              <span>250</span>
+              <span>500</span>
+            </div>
+            <div class="progress-bar-content">
+              <span class="progress-tier"></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <h4 class="reward-banner">Spend $100 more to get FREE SHIPPING</h4>
+        </template>
+        <section
         id="cart-summary"
         class="cartSummary"
         data-component="cartSummary"
-      >
-      <h2>Item summary</h2>
-      <div id="cart-summary-list">
-
-      </div>
+        >
+        <div id="cart-summary-list"></div>
       </section>
       <template id="cart-summary-row-template">
-        <div class='item'>
-          <img src='./images/johan2.jpeg' alt="product image"/>
-          <div class='name-and-description'>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="form-and-button-holder">
-            <button class='decrement' >-</button>
-            <form>
-            <input class='increment-input' type="number"/>
-            </form>
-            <button class='increment' >+</button>
-          </div>
-          <span class="price"></span>
-         </div>
-      </template>
+        <div class="item">
+            <img src="./images/johan2.jpeg" alt="product image" />
+            <div class="name-and-description">
+                <span></span>
+                <span></span>
+            </div>
+            <div class="form-and-button-holder">
+                <button class="decrement">-</button>
+                <input class="increment-input" type="number" />
+                <button class="increment">+</button>
+            </div>
+            <span class="price"></span>
+        </div>
+    </template>
+    </div>
       <section class="orderSummary" data-component="orderSummary">
         <h2>Order summary</h2>
         <div id="total-order-holder"></div>
         <template id="total-order-holder-template">
-          <h4>Subtotal<span id="subtotal">$135.85</span></h4>
+          <h4>Subtotal<span id="subtotal">$0.00</span></h4>
           <h4>Shipping<span>Calculated at next step</span></h4>
           <h4>Coupon Codes:</h4>
           <div class="voucher-examples">
-            <span>BLCKFRDY ($10.00)</span>
-            <span>FREE-SHIPPING (Free shipping)</span>
+              <span>In this case validating voucher is disabled.</span>
           </div>
           <div class="voucher-input-and-button-holder">
-            <form id="voucher-code-form">
-              <input
-                id="voucher-code"
-                type="text"
-                placeholder="Enter your code"
-              />
-              <button type="submit" id="check-voucher-code"><img src="./images/rightArrow.svg" alt="Right Arrow"></button>
-            </form>
+              <form id="voucher-code-form">
+                  <input
+                      id="voucher-code"
+                      type="text"
+                      placeholder="Enter your code"
+                  />
+                  <button type="submit" id="check-voucher-code">
+                      <img
+                          src="./images/rightArrow.svg"
+                          alt="Right Arrow"
+                      />
+                  </button>
+              </form>
           </div>
           <div class="voucher-form-error">
-            <p></p>
+              <p></p>
           </div>
           <div class="promotions-holder">
-            <h4>Promotions:</h4>
-            <div id="promotion-holder" class="promotion-holder"></div>
-            <div class="error-holder"></div>
+              <h4>Promotions:</h4>
+              <div
+                  id="promotion-holder"
+                  class="promotion-holder"
+              ></div>
+              <div class="error-holder"></div>
           </div>
           <h4 class="discount-price-holder">
-            All Your Discounts:<span id="all-discounts">n/a</span>
+              All Your Discounts:<span id="all-discounts">n/a</span>
           </h4>
-          <h4>Grand total:<span id="grand-total">$135.85</span></h4>
-        </template>
+          <h4>Grand total:<span id="grand-total">$0.00</span></h4>
+      </template>
         <button id="checkout-button" class="checkout-button">Checkout</button>
       </section>
     </div>
-
     <footer data-component="footer" class="footer">
       <div class="footer-left-holder">
         <img
@@ -122,7 +149,7 @@
           <a href="#"></a>
           <a href="#"></a>
         </div>
-        <!-- <p class="copyright-holder">© 2022 voucherify</p> -->
+        <p class="copyright-holder">© 2022 voucherify</p>
       </div>
       <div class="footer-right-holder">
         <ul>
@@ -144,11 +171,12 @@
           <li>Terms & Conditions</li>
         </ul>
       </div>
-      <div class="product-info">
-        <p class="copyright-holder">© 2022 voucherify</p>
-        <a id="repo-link" target="_blank" href="https://github.com/voucherifyio/voucherify-examples/tree/main/voucher-code-redemption">GitHub - Voucher code redemption</a>
-      </div>
     </footer>
+    <script
+	type="text/javascript"
+	src="https://unpkg.com/@voucherify/sdk/dist/voucherifysdk.umd.production.min.js"
+	crossorigin
+></script>
     <script type="module" src="./js/index.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 import {
     queryRedeemVoucherButton,
-    renderVoucherPropertiesFromStorage,
+    renderRewardsFromStorage,
     renderProducts,
     getCartAndVoucherFromSessionStorage,
     filterAndReduceProducts
@@ -9,27 +9,27 @@ import {
 const redeemVoucherButton = queryRedeemVoucherButton();
 
 const state = {
-    products         : [],
-    voucherProperties: {}
+    products: [],
+    rewards : []
 };
 
 getCartAndVoucherFromSessionStorage().then(data => {
     state.products = data.products;
-    state.voucherProperties = data.voucherProperties;
+    state.rewards = data.rewards;
     renderProducts(state.products);
-    renderVoucherPropertiesFromStorage(state.voucherProperties, state.products);
+    renderRewardsFromStorage(state.rewards, state.products);
 });
 
-const redeemVoucher = async (voucherProperties, products) => {
+const redeemVoucher = async (rewards, products) => {
     try {
         const { items } = filterAndReduceProducts(products);
-        const response = await fetch("/stacking-promotions/redeem-stackable", {
+        const response = await fetch("/tiered-cart-promotions/redeem-stackable", {
             method : "POST",
             headers: {
                 "Accept"      : "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ vouchersArray: voucherProperties.redeemables, items }),
+            body: JSON.stringify({ rewards, items }),
         });
 
         const data = await response.json();
@@ -49,5 +49,5 @@ const redeemVoucher = async (voucherProperties, products) => {
 
 redeemVoucherButton.addEventListener("click", e => {
     e.preventDefault();
-    redeemVoucher(state.voucherProperties, state.products);
+    redeemVoucher(state.rewards, state.products);
 });
