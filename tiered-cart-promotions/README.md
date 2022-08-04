@@ -16,18 +16,20 @@ This example introduces an online coffee shop and many vouchers in your dashboar
 ## Demo <a id="demo"></a>
 
 Live demo on:<br>
-[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://voucherify-examples.herokuapp.com/tiered-cart-promotions/)
-
+[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://voucherify-examples.herokuapp.com/tiered-cart-promotions/)<br>
+[<img src="https://user-images.githubusercontent.com/77458595/182553794-59bf31fe-91b9-4ebe-b468-d466b0bb73b2.svg" width="100px" />](https://replit.com/@Voucherify/Voucherify-Examples?v=1#README.md)
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
 
-The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Reward promotion" you can apply in your example or you can add your own [reward campaign](https://support.voucherify.io/article/519-create-cart-level-promotions).
+The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Rewards promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment you can add your own [reward campaign](https://support.voucherify.io/article/519-create-cart-level-promotions). If you want your campaign to work with this example you have to give the same campaign name and properties of promotion tiers like below.
+
+<img width="1189" alt="Screenshot 2022-08-03 at 14 52 39" src="https://user-images.githubusercontent.com/77458595/182775604-db10d656-f9f8-410f-ad74-6aa746ba4727.png">
 
 ```In this example applying coupons is not possible.```
 
 This sample calls two endpoints:
 
 * [Validate promotion](https://docs.voucherify.io/reference/validate-promotions-1) - check if any [promotion tier](https://docs.voucherify.io/docs/promotion-tier) exists.
-* [Redeem rewards](https://docs.voucherify.io/reference/redeem-voucher) — runs validation and then marks the rewards as used. After clicking the redemption button you should see the message "Rewards redeemed" - that means your redemption process was successful.
+* [Redeem rewards](https://docs.voucherify.io/reference/redeem-stacked-discounts) — runs validation and then marks the rewards as used. After clicking the redemption button you should see the message "Rewards redeemed" - that means your redemption process was successful.
 
 ## Get support <a id="support"></a>
 
