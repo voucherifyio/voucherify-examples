@@ -7,6 +7,7 @@ import express from "express";
 
 export const accessTotieredPromotionsApp = app => {
     app.use("/tiered-cart-promotions", express.static(path.join(__dirname, "../client")));
+    app.use("/images", express.static(path.join(__dirname, "../client/images")));
 };
 
 const customer = {
