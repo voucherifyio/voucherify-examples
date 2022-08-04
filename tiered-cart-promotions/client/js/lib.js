@@ -76,6 +76,9 @@ export const getRewardsRender = () => {
         const rect = document.querySelectorAll(".progress-bar-numbers span")[rewards[0]?.hierarchy]?.getBoundingClientRect().left;
         progressTier.style.width = `${((rect - 20).toFixed(1))}px`;
         rewardItem.querySelector(".reward-banner").innerHTML = rewards[0]?.hierarchy !== 3 ? rewards[0]?.banner || "Spend $100 more to get FREE SHIPPING" : "Congratulations, you achieved all rewards!";
+        rewards?.map(reward => {
+            rewardItem.querySelectorAll(".reward-titles p > img")[reward?.hierarchy - 1].src="../images/reward-achieved.svg";
+        });
         rewardsHtmlElement.replaceChildren(rewardItem);
         return rewardItem;
     };
@@ -108,17 +111,14 @@ export const renderRewardsFromStorage = (rewards, products) => {
     rewards?.map(reward => {
         discountsTemplate.querySelector(".coupons").innerHTML += `<h5 class="coupon"><span class="coupon-value">Reward Tier ${reward.hierarchy}</span></h5>`;
     });
-    const shipping = discountsTemplate.querySelector(".shipping span").innerHTML = "$8.99";
-    discountsTemplate.querySelector(".grand-total span").innerHTML = `$${(+shipping.replace("$", "") + +subtotal - discountValue.replace("$", "")).toFixed(2)}`;
+    const shippingPrice = 8.99;
+    discountsTemplate.querySelector(".shipping span").innerHTML = `$${shippingPrice}`;
+    discountsTemplate.querySelector(".grand-total span").innerHTML = `$${(shippingPrice + +subtotal - discountValue.replace("$", "")).toFixed(2)}`;
     htmlElement.replaceChildren(discountsTemplate);
     return discountsTemplate;
 };
 
-export const displayErrorMessage = (message, voucherValue) => {
-    if (!voucherValue) {
-        document.querySelector(".voucher-form-error p").innerHTML = `${message}`;
-        return false;
-    }
+export const displayErrorMessage = message => {
     document.querySelector(".voucher-form-error p").innerHTML = "";
     document.querySelector(".error-holder").innerHTML = `<h5 id="error-message">${message}</h5>`;
     document.getElementById("voucher-code-form").addEventListener("submit", event => {
