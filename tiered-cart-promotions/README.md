@@ -11,7 +11,7 @@ Validating and accepting promo codes in your checkout from scratch might be tric
 
 This is where the [Voucherify promotion engine](https://docs.voucherify.io/docs) kicks in. Together with our [Promo UI Kit](https://www.figma.com/community/file/1100356622702326488) you can quickly build the best promotion experience for your customers.
 
-This example introduce an online coffee shop and many vouchers in your dashboard are about it.
+This example introduces an online coffee shop and many vouchers in your dashboard are about it.
 
 ## Demo <a id="demo"></a>
 
@@ -20,14 +20,14 @@ Live demo on:<br>
 
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
 
-The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test campaign "Reward promotion" you can apply in your example or you can add your own [reward campaign](https://support.voucherify.io/article/519-create-cart-level-promotions).
+The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Reward promotion" you can apply in your example or you can add your own [reward campaign](https://support.voucherify.io/article/519-create-cart-level-promotions).
 
 ```In this example applying coupons is not possible.```
 
 This sample calls two endpoints:
 
 * [Validate promotion](https://docs.voucherify.io/reference/validate-promotions-1) - check if any [promotion tier](https://docs.voucherify.io/docs/promotion-tier) exists.
-* [Redeem rewards](https://docs.voucherify.io/reference/redeem-voucher) — runs validation and then marks the rewards as used. After clicking the redemption button you should see the message "Rewards redeemed" - that means your redemption process was successfull.
+* [Redeem rewards](https://docs.voucherify.io/reference/redeem-voucher) — runs validation and then marks the rewards as used. After clicking the redemption button you should see the message "Rewards redeemed" - that means your redemption process was successful.
 
 ## Get support <a id="support"></a>
 
