@@ -17,9 +17,9 @@ This example introduce an online coffee shop and many vouchers in your dashboard
 ## Demo <a id="demo"></a>
 
 Live demo on:<br>
-[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://voucherify-examples.herokuapp.com/stacking-promotions/)
-
+[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_169035.png" width="100px"/>](https://voucherify-examples.herokuapp.com/stacking-promotions/)<br>
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
+[<img src="https://user-images.githubusercontent.com/77458595/182553794-59bf31fe-91b9-4ebe-b468-d466b0bb73b2.svg" width="100px" />](https://replit.com/@Voucherify/Voucherify-Examples?v=1#README.md)
 
 The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with several test vouchers you can apply in the checkout, e.g.:
 

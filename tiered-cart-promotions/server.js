@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 
 export const accessTotieredPromotionsApp = app => {
     app.use("/tiered-cart-promotions", express.static(path.join(__dirname, "./public")));
+    app.use("/images", express.static(path.join(__dirname, "./public/images")));
 };
 
 const customer = {
