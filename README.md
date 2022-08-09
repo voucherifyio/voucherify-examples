@@ -13,6 +13,7 @@ Voucherify Examples are examples of integration and use of the Voucherify produc
 
 * [Voucher code redemption](https://github.com/voucherify-samples/voucherify-examples/tree/main/voucher-code-redemption)
 * [Stacking promotions](https://github.com/voucherify-samples/voucherify-examples/tree/main/stacking-promotions)
+* [Tiered cart promotions](https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions)
 
 Check out all our examples in one place!
 
