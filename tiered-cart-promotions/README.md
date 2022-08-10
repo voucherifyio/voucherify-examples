@@ -5,7 +5,7 @@
 
 # Tiered cart promotions with Voucherify <a id="voucherify-example"></a>
 
-This sample shows how we can reward our customers by adding rewards for more money spent. We can achieve that solution thanks [validate promotion](https://docs.voucherify.io/reference/validate-promotions-1) endpoint. At the end we should use [redeem stackable](https://docs.voucherify.io/reference/redeem-stacked-discounts) endpoint like in the other examples. The stacking mechanism allows you to combine up to 5 promo codes or cart-level promotions with a single request.
+This sample shows how to reward customers by adding rewards for more money spent. We can achieve that solution thanks to [Validate-Promotion-Tier](https://docs.voucherify.io/reference/validate-promotions-1) and [Redeem-Promotion endpoints](https://docs.voucherify.io/reference/redeem-stacked-discounts).
 
 Validating and accepting promo codes in your checkout from scratch might be tricky — calculating discounted prices, error message handling, and localization are just a few things to think about when building a simple promo code redemption flow.
 
