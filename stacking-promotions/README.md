@@ -6,7 +6,7 @@
 # Stacking-promotions with Voucherify <a id="voucherify-example"></a>
 
 
-This sample shows you how to stack different types of promotions with Voucherify. This is achieved by integrating [validate stackable](https://docs.voucherify.io/reference/validate-stacked-discounts-1) and [redeem stackable](https://docs.voucherify.io/reference/redeem-stacked-discounts) endpoints. The stacking mechanism allows you to combine up to 5 promo codes or cart-level promotions with a single request.
+This sample shows how to stack different types of promotions with Voucherify. This is achieved by integrating [Validate-Stackable-Discounts](https://docs.voucherify.io/reference/validate-stacked-discounts-1) and [Redeem-Stackable-Discounts](https://docs.voucherify.io/reference/redeem-stacked-discounts) endpoints. The stacking mechanism allows you to combine up to 5 promo codes or cart-level promotions with a single request.
 
 Validating and accepting promo codes in your checkout from scratch might be tricky — calculating discounted prices, error message handling, and localization are just a few things to think about when building a simple promo code redemption flow.
 
