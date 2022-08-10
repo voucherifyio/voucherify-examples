@@ -13,10 +13,7 @@ h1 {
     text-align: center;
     margin: 40px 0px;
     font-size: 48px;
-    background: -webkit-linear-gradient(90deg,#ff8a5b,#bea286 35%,#a4ac98 46%,#9fae9b 48%,#79bcb4 64%,#3bd4dd 90%,#23dded);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
 }
 
 .projects-wrapper {
