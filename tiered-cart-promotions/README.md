@@ -11,7 +11,7 @@ Validating and accepting promo codes in your checkout from scratch might be tric
 
 This is where the [Voucherify promotion engine](https://docs.voucherify.io/docs) kicks in. Together with our [Promo UI Kit](https://www.figma.com/community/file/1100356622702326488) you can quickly build the best promotion experience for your customers.
 
-This example introduces an online coffee shop and many vouchers in your dashboard are about it.
+This example is built on top of an online coffee shop with many voucher codes and campaigns available.
 
 ## Demo <a id="demo"></a>
 
