@@ -6,9 +6,7 @@
 # Redeem promo codes with Voucherify <a id="voucherify-example"></a>
 
 
-This sample shows you how to integrate with Voucherify [voucher redemption endpoint](https://docs.voucherify.io/reference/redeem-voucher).
-
-Validating and accepting promo codes in your checkout from scratch might be tricky — calculating discounted prices, error message handling, and localization are just a few things to think about when building a simple promo code redemption flow.
+This sample shows how to integrate with the [Redeem-Voucher endpoint](https://docs.voucherify.io/reference/redeem-voucher). Validating and accepting promo codes at checkout might be tricky — calculating order total, error message handling, and localization are just a few things to think about when building a simple promo code redemption flow.
 
 This is where the [Voucherify promotion engine](https://docs.voucherify.io/docs) kicks in. Together with our [Promo UI Kit](https://www.figma.com/community/file/1100356622702326488) you can quickly build the best promotion experience for your customers.
 
