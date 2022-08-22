@@ -84,7 +84,7 @@ const defaultItems = [
         productName       : "Johan & Nystrom Caravan",
         productDescription: "20 oz bag",
         quantity          : 0,
-        price             : "26.99",
+        price             : "80.99",
         src               : "./images/johan2.jpeg",
         id                : 1
     },
