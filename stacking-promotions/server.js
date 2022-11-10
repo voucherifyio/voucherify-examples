@@ -5,6 +5,11 @@ import express from "express";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+/* 
+    @todo refactor: There is no need to expose two functions to add new routes to the server. 
+    Instead, it can be just one function, e.g. `addStackingPromotionRoutes`, that will add both: API endpoints 
+    and serve static files from the public folder. It will also make it easier to understand imports in the main `server.js` file.
+*/
 export const accessToStackingPromotionsApp = app => {
     app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
 };
@@ -13,6 +18,13 @@ const customer = {
     "source_id": "test_customer_id_1"
 };
 
+/* 
+    @todo refactor: Few things:
+    - improve naming, "promotionStackableObj" does not make sense here. It's too generic to suggest where/how/why it's used. Because it's
+      used as a parameter for client.validations.validateStackable function, we can use the naming used inside the voucherify client: "validateStackableParams"
+    - it's a huge mistake to make promotionStackableObj object global. We mutate this object inside the /stacking-promotions/validate-stackable endpoint,
+      which may lead to mixing context between different requests. Avoid potential side effects at all costs.
+*/
 const promotionStackableObj = {
     order: {
         amount: null,
@@ -22,6 +34,9 @@ const promotionStackableObj = {
 };
 
 export const attachEndpointsStackingPromotions = (app, client) => {
+    /*
+        @todo refactor: Improve naming; default-items sound confusing to me. Both "default" and "items" are too generic, IMHO. What about "default-cart-items"?
+    */
     app.get("/stacking-promotions/default-items", (req, res) => {
         return res.status(200).send(defaultItems);
     });
@@ -97,6 +112,10 @@ export const attachEndpointsStackingPromotions = (app, client) => {
     }));
 };
 
+/*
+    @todo refactor: Improve naming. We have "product" name that is the same as "item" name. the same with "input" and "requested".
+    Try to be consistent accross all examples/files  
+*/
 const mapInputIntoKnownProducts = requestedCart => {
     return requestedCart.map(requestedItem => {
         const item = defaultItems.find(item => requestedItem?.id && item.id === requestedItem.id);
