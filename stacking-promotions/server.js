@@ -5,40 +5,24 @@ import express from "express";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-/* 
-    @todo refactor: There is no need to expose two functions to add new routes to the server. 
-    Instead, it can be just one function, e.g. `addStackingPromotionRoutes`, that will add both: API endpoints 
-    and serve static files from the public folder. It will also make it easier to understand imports in the main `server.js` file.
-*/
-export const accessToStackingPromotionsApp = app => {
+
+export const addStackingPromotionRoutes = (app, client) => {
+    const customer = {
+        "source_id": "test_customer_id_1"
+    };
+
+    const validateStackableParams = {
+        order: {
+            amount: null,
+        },
+        customer   : customer,
+        redeemables: []
+    };
+
     app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
-};
 
-const customer = {
-    "source_id": "test_customer_id_1"
-};
-
-/* 
-    @todo refactor: Few things:
-    - improve naming, "promotionStackableObj" does not make sense here. It's too generic to suggest where/how/why it's used. Because it's
-      used as a parameter for client.validations.validateStackable function, we can use the naming used inside the voucherify client: "validateStackableParams"
-    - it's a huge mistake to make promotionStackableObj object global. We mutate this object inside the /stacking-promotions/validate-stackable endpoint,
-      which may lead to mixing context between different requests. Avoid potential side effects at all costs.
-*/
-const promotionStackableObj = {
-    order: {
-        amount: null,
-    },
-    customer   : customer,
-    redeemables: []
-};
-
-export const attachEndpointsStackingPromotions = (app, client) => {
-    /*
-        @todo refactor: Improve naming; default-items sound confusing to me. Both "default" and "items" are too generic, IMHO. What about "default-cart-items"?
-    */
-    app.get("/stacking-promotions/default-items", (req, res) => {
-        return res.status(200).send(defaultItems);
+    app.get("/stacking-promotions/default-cart-items", (req, res) => {
+        return res.status(200).send(defaultCartItems);
     });
 
     app.post("/stacking-promotions/validate-promotion", asyncHandler(async (req, res) => {
@@ -62,12 +46,12 @@ export const attachEndpointsStackingPromotions = (app, client) => {
                 message: "Voucher code is required"
             });
         }
-        promotionStackableObj.order.amount = calculateCartTotalAmount(items);
-        promotionStackableObj.redeemables = vouchersArray;
-        promotionStackableObj.redeemables = removeDuplicatedPromoObjects(promotionStackableObj.redeemables);
+        validateStackableParams.order.amount = calculateCartTotalAmount(items);
+        validateStackableParams.redeemables = vouchersArray;
+        validateStackableParams.redeemables = removeDuplicatedPromoObjects(validateStackableParams.redeemables);
 
         try {
-            const { redeemables, order } = await client.validations.validateStackable(promotionStackableObj);
+            const { redeemables, order } = await client.validations.validateStackable(validateStackableParams);
             const [ voucher ] = redeemables.filter(voucher => voucher.status === "INAPPLICABLE");
 
             if (voucher?.result?.error) {
@@ -94,11 +78,11 @@ export const attachEndpointsStackingPromotions = (app, client) => {
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
 
-        promotionStackableObj.order.amount = calculateCartTotalAmount(items);
-        promotionStackableObj.redeemables = vouchersArray;
+        validateStackableParams.order.amount = calculateCartTotalAmount(items);
+        validateStackableParams.redeemables = vouchersArray;
 
         try {
-            await client.redemptions.redeemStackable(promotionStackableObj);
+            await client.redemptions.redeemStackable(validateStackableParams);
             return res.status(200).send({
                 status : "success",
                 message: "Voucher redeemed",
@@ -112,13 +96,10 @@ export const attachEndpointsStackingPromotions = (app, client) => {
     }));
 };
 
-/*
-    @todo refactor: Improve naming. We have "product" name that is the same as "item" name. the same with "input" and "requested".
-    Try to be consistent accross all examples/files  
-*/
+
 const mapInputIntoKnownProducts = requestedCart => {
     return requestedCart.map(requestedItem => {
-        const item = defaultItems.find(item => requestedItem?.id && item.id === requestedItem.id);
+        const item = defaultCartItems.find(item => requestedItem?.id && item.id === requestedItem.id);
         if (!item) {
             return false;
         }
@@ -132,7 +113,7 @@ const removeDuplicatedPromoObjects = array => {
     return array.filter((value, index, self) => index === self.findIndex(t => (t.id === value.id)));
 };
 
-const defaultItems = [
+const defaultCartItems = [
     {
         productName       : "Johan & Nystrom Caravan",
         productDescription: "20 oz bag",

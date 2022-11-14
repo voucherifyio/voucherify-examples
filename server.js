@@ -1,5 +1,5 @@
 import express from "express";
-import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "./stacking-promotions/server.js";
+import { addStackingPromotionRoutes } from "./stacking-promotions/server.js";
 import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "./voucher-code-redemption/server.js";
 import { accessTotieredPromotionsApp, attachEndpointsTieredCartPromotions } from "./tiered-cart-promotions/server.js";
 import { fileURLToPath } from "url";
@@ -49,8 +49,7 @@ app.listen(port, () => {
     console.log(`Hot beans app listening on port ${port}`);
 });
 
-accessToStackingPromotionsApp(app);
-attachEndpointsStackingPromotions(app, client);
+addStackingPromotionRoutes(app, client);
 
 accessToVoucherCodeRedemptionApp(app);
 attachEndpointsVoucherCodeRedemption(app, client);
