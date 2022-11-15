@@ -14,7 +14,7 @@ const app = express();
 
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
-    secretKey    : `${process.env.VOUCHERIFY_SECRET_KEY}`,
+    secretKey: `${process.env.VOUCHERIFY_SECRET_KEY}`,
     // apiUrl: 'https://<region>.api.voucherify.io'
 });
 
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./welcome-screen")));
 
 app.use((req, res, next) => {
-    res.append("Access-Control-Allow-Origin", [ "*" ]);
+    res.append("Access-Control-Allow-Origin", ["*"]);
     res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     res.append("Access-Control-Allow-Headers", "Content-Type");
     next();
@@ -41,7 +41,22 @@ const checkCredentials = async () => {
         throw new Error(error);
     }
 };
+
+
+const checkCampaign = async () => {
+    try {
+        await client.campaigns.get("Reward Promotion");
+    } catch (error) {
+        if (error.code === 404) {
+            const msg = "The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly. Please create a 'Reward Promotion' campaign first, you can check the details by visiting `https://docs.voucherify.io/reference/create-campaign`";
+            throw new Error(msg);
+        }
+        throw new Error(error);
+    }
+}
+
 checkCredentials();
+checkCampaign();
 
 const port = process.env.PORT || 8080;
 

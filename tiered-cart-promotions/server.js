@@ -27,8 +27,7 @@ export const attachEndpointsTieredCartPromotions = (app, client) => {
         const rewardPromotion = promotions.filter(campaign => campaign.name.startsWith("Reward Promotion"));
 
         return res.status(200).send(rewardPromotion);
-
-    }));
+    }));  
 
     app.post("/tiered-cart-promotions/redeem-stackable", asyncHandler(async (req, res) => {
         const products = req.body.items;
