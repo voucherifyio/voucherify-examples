@@ -5,20 +5,12 @@ import express from "express";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const customer = {
+    "source_id": "test_customer_id_1"
+};
+
 
 export const addStackingPromotionRoutes = (app, client) => {
-    const customer = {
-        "source_id": "test_customer_id_1"
-    };
-
-    const validateStackableParams = {
-        order: {
-            amount: null,
-        },
-        customer   : customer,
-        redeemables: []
-    };
-
     app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
 
     app.get("/stacking-promotions/default-cart-items", (req, res) => {
@@ -41,6 +33,15 @@ export const addStackingPromotionRoutes = (app, client) => {
         const vouchersArray = req.body.vouchersArray;
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
+
+        const validateStackableParams = {
+            order: {
+                amount: null,
+            },
+            customer   : customer,
+            redeemables: []
+        };
+
         if (!vouchersArray) {
             return res.send({
                 message: "Voucher code is required"
@@ -78,11 +79,19 @@ export const addStackingPromotionRoutes = (app, client) => {
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
 
-        validateStackableParams.order.amount = calculateCartTotalAmount(items);
-        validateStackableParams.redeemables = vouchersArray;
+        const redeemStackableParams = {
+            order: {
+                amount: null,
+            },
+            customer   : customer,
+            redeemables: []
+        };
+
+        redeemStackableParams.order.amount = calculateCartTotalAmount(items);
+        redeemStackableParams.redeemables = vouchersArray;
 
         try {
-            await client.redemptions.redeemStackable(validateStackableParams);
+            await client.redemptions.redeemStackable(redeemStackableParams);
             return res.status(200).send({
                 status : "success",
                 message: "Voucher redeemed",
