@@ -11,7 +11,7 @@ import {
 
 const state = {
     products: [],
-    rewards : []
+    rewards: []
 };
 
 const checkoutButton = queryCheckoutButton();
@@ -57,25 +57,29 @@ const validatePromotion = async products => {
     state.rewards = [];
     const { items } = filterAndReduceProducts(products);
     const response = await fetch("/tiered-cart-promotions/validate-promotion", {
-        method : "POST",
+        method: "POST",
         headers: {
-            "Accept"      : "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ items })
     });
     const data = await response.json();
+    if (response.status === 404) {
+        if (window.confirm('Required campaign not found. Click OK to proceed to the documentation page for more details. Click Cancel to close the message.'))
+            window.open('https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#demo-', '_blank');
+    }
     if (response.status !== 200) {
         throw new Error("Validate rewards is not possible");
     }
     return {
         rewards: data.map(reward => {
             return {
-                banner   : reward.banner,
+                banner: reward.banner,
                 hierarchy: reward.hierarchy,
-                discount : reward.order.total_applied_discount_amount,
-                object   : reward.object,
-                id       : reward.id
+                discount: reward.order.total_applied_discount_amount,
+                object: reward.object,
+                id: reward.id
             };
         })
     };

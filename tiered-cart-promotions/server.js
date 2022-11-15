@@ -25,6 +25,9 @@ export const attachEndpointsTieredCartPromotions = (app, client) => {
 
         const { promotions } = await client.promotions.validate({ customer: customer, order: { amount: calculateCartTotalAmount(items), items: items } });
         const rewardPromotion = promotions.filter(campaign => campaign.name.startsWith("Reward Promotion"));
+        if (rewardPromotion.length === 0) {
+            return res.status(404).send(rewardPromotion);
+        }
 
         return res.status(200).send(rewardPromotion);
     }));  
