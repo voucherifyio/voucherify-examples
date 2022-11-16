@@ -9,7 +9,6 @@ const customer = {
     "source_id": "test_customer_id_1"
 };
 
-
 export const addStackingPromotionRoutes = (app, client) => {
     app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
 
@@ -36,10 +35,10 @@ export const addStackingPromotionRoutes = (app, client) => {
 
         const validateStackableParams = {
             order: {
-                amount: null,
+                amount: calculateCartTotalAmount(items),
             },
             customer   : customer,
-            redeemables: []
+            redeemables: removeDuplicatedPromoObjects(vouchersArray)
         };
 
         if (!vouchersArray) {
@@ -47,9 +46,6 @@ export const addStackingPromotionRoutes = (app, client) => {
                 message: "Voucher code is required"
             });
         }
-        validateStackableParams.order.amount = calculateCartTotalAmount(items);
-        validateStackableParams.redeemables = vouchersArray;
-        validateStackableParams.redeemables = removeDuplicatedPromoObjects(validateStackableParams.redeemables);
 
         try {
             const { redeemables, order } = await client.validations.validateStackable(validateStackableParams);
@@ -81,14 +77,11 @@ export const addStackingPromotionRoutes = (app, client) => {
 
         const redeemStackableParams = {
             order: {
-                amount: null,
+                amount: calculateCartTotalAmount(items),
             },
             customer   : customer,
-            redeemables: []
+            redeemables: vouchersArray
         };
-
-        redeemStackableParams.order.amount = calculateCartTotalAmount(items);
-        redeemStackableParams.redeemables = vouchersArray;
 
         try {
             await client.redemptions.redeemStackable(redeemStackableParams);
