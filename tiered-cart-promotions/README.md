@@ -27,8 +27,8 @@ The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/tes
 ## Creating a "Reward Promotion" campaign<a id="creating-campaign"></a>
 
 ### First of all, it is required to add missing ```validation_rules```:
-- Change X-App-Id to your Application ID
-- Change X-App-Token to your Secret Key
+- Change X-App-Id to your Application ID.
+- Change X-App-Token to your Secret Key.
 - Keep the returned validation_rule id after executing each request. It will be required for the main request.
 
 ```
@@ -152,8 +152,8 @@ curl --location --request POST 'https://api.voucherify.io/v1/validation-rules' \
 ```
 
 ### Secondly, add the missing ```Reward Promotion``` campaign:
-- Change X-App-Id to your Application ID
-- Change X-App-Token to your Secret Key
+- Change X-App-Id to your Application ID.
+- Change X-App-Token to your Secret Key.
 - Replace the ```/id/``` in each ```tier``` with previously saved ```id``` of the validation_rules
 
 ```
@@ -243,7 +243,9 @@ curl --location --request POST 'https://api.voucherify.io/v1/campaigns' \
 }'
 ```
 
-### Finally, check if your campaign has been created on your Voucherify account.
+Finally, check if your campaign has been created on your Voucherify account.
+
+
 
 ```In this example applying coupons is not possible.```
 
