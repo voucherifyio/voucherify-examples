@@ -65,10 +65,6 @@ const validatePromotion = async products => {
         body: JSON.stringify({ items })
     });
     const data = await response.json();
-    if (response.status === 404) {
-        if (window.confirm('Required campaign not found. Click OK to proceed to the documentation page for more details. Click Cancel to close the message.'))
-            window.open('https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#demo-', '_blank');
-    }
     if (response.status !== 200) {
         throw new Error("Validate rewards is not possible");
     }
