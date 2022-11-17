@@ -42,13 +42,15 @@ const checkCredentials = async () => {
     }
 };
 
-
+//Important!
+//The 'Reward Promotion' campaign is required for this project to work properly. if it doesn't exist you will see an error in the console.
+//Visit https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign for getting instructions on how to create the missing campaign. 
 const checkCampaign = async () => {
     try {
         await client.campaigns.get("Reward Promotion");
     } catch (error) {
         if (error.code === 404) {
-            const msg = "The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly. Please create a 'Reward Promotion' campaign first, you can check the details by visiting `https://docs.voucherify.io/reference/create-campaign`";
+            const msg = "The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly. Please create a 'Reward Promotion' campaign first, you can check the details by visiting https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign";
             throw new Error(msg);
         }
         throw new Error(error);

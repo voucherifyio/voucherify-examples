@@ -246,7 +246,6 @@ curl --location --request POST 'https://api.voucherify.io/v1/campaigns' \
 Finally, check if your campaign has been created on your Voucherify account.
 
 
-
 ```In this example applying coupons is not possible.```
 
 This sample calls two endpoints:
