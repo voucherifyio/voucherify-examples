@@ -24,9 +24,12 @@ The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/tes
 
 <img width="1189" alt="Screenshot 2022-08-03 at 14 52 39" src="https://user-images.githubusercontent.com/77458595/182775604-db10d656-f9f8-410f-ad74-6aa746ba4727.png">
 
-## Creating the "Reward Promotion" campaign <a id="creating-campaign"></a>
+## Creating a "Reward Promotion" campaign<a id="creating-campaign"></a>
 
-
+### First of all, it is required to add missing ```validation_rules```:
+- Change X-App-Id to your Application ID
+- Change X-App-Token to your Secret Key
+- Keep the returned validation_rule id after executing each request. It will be required for the main request.
 
 ```
 curl --location --request POST 'https://api.voucherify.io/v1/validation-rules' \
@@ -34,37 +37,37 @@ curl --location --request POST 'https://api.voucherify.io/v1/validation-rules' \
 --header 'X-App-Token: xxx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"id": null,
-"name": "Business Validation Rule - Reward Promotion Tier 1",
-"rules": {
-"1": {
-"name": "order.amount",
-"property": null,
-"conditions": {
-"$more_than": [
-10000
-]
-}
-},
-"2": {
-"name": "order.amount",
-"property": null,
-"conditions": {
-"$is": [
-10000
-]
-}
-},
-"logic": "(1 or 2)"
-},
-"error": null,
-"applicable_to": {
-"included": [],
-"excluded": [],
-"included_all": false
-},
-"type": "advanced",
-"context_type": "campaign.promotion"
+  "id": null,
+  "name": "Business Validation Rule - Reward Promotion Tier 1",
+  "rules": {
+    "1": {
+      "name": "order.amount",
+      "property": null,
+      "conditions": {
+        "$more_than": [
+          10000
+        ]
+      }
+    },
+    "2": {
+      "name": "order.amount",
+      "property": null,
+      "conditions": {
+        "$is": [
+          10000
+        ]
+      }
+    },
+    "logic": "(1 or 2)"
+  },
+  "error": null,
+  "applicable_to": {
+    "included": [],
+    "excluded": [],
+    "included_all": false
+  },
+  "type": "advanced",
+  "context_type": "campaign.promotion"
 }'
 ```
 
@@ -74,37 +77,37 @@ curl --location --request POST 'https://api.voucherify.io/v1/validation-rules' \
 --header 'X-App-Token: xxx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"id": null,
-"name": "Business Validation Rule - Reward Promotion Tier 2",
-"rules": {
-"1": {
-"name": "order.amount",
-"property": null,
-"conditions": {
-"$more_than": [
-25000
-]
-}
-},
-"2": {
-"name": "order.amount",
-"property": null,
-"conditions": {
-"$is": [
-25000
-]
-}
-},
-"logic": "(1 or 2)"
-},
-"error": null,
-"applicable_to": {
-"included": [],
-"excluded": [],
-"included_all": false
-},
-"type": "advanced",
-"context_type": "campaign.promotion.discount.apply_to_order"
+  "id": null,
+  "name": "Business Validation Rule - Reward Promotion Tier 2",
+  "rules": {
+    "1": {
+      "name": "order.amount",
+      "property": null,
+      "conditions": {
+        "$more_than": [
+          25000
+        ]
+      }
+    },
+    "2": {
+      "name": "order.amount",
+      "property": null,
+      "conditions": {
+        "$is": [
+          25000
+        ]
+      }
+    },
+    "logic": "(1 or 2)"
+  },
+  "error": null,
+  "applicable_to": {
+    "included": [],
+    "excluded": [],
+    "included_all": false
+  },
+  "type": "advanced",
+  "context_type": "campaign.promotion.discount.apply_to_order"
 }'
 ```
 
@@ -114,39 +117,44 @@ curl --location --request POST 'https://api.voucherify.io/v1/validation-rules' \
 --header 'X-App-Token: xxx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"id": null,
-"name": "Business Validation Rule - Reward Promotion Tier 3",
-"rules": {
-"1": {
-"name": "order.amount",
-"property": null,
-"conditions": {
-"$more_than": [
-50000
-]
-}
-},
-"2": {
-"name": "order.amount",
-"property": null,
-"conditions": {
-"$is": [
-50000
-]
-}
-},
-"logic": "(1 or 2)"
-},
-"error": null,
-"applicable_to": {
-"included": [],
-"excluded": [],
-"included_all": false
-},
-"type": "advanced",
-"context_type": "campaign.promotion.discount.apply_to_order"
+ "id": null,
+  "name": "Business Validation Rule - Reward Promotion Tier 3",
+  "rules": {
+    "1": {
+      "name": "order.amount",
+      "property": null,
+      "conditions": {
+        "$more_than": [
+          50000
+        ]
+      }
+    },
+    "2": {
+      "name": "order.amount",
+      "property": null,
+      "conditions": {
+        "$is": [
+          50000
+        ]
+      }
+    },
+    "logic": "(1 or 2)"
+  },
+  "error": null,
+  "applicable_to": {
+    "included": [],
+    "excluded": [],
+    "included_all": false
+  },
+  "type": "advanced",
+  "context_type": "campaign.promotion.discount.apply_to_order"
 }'
 ```
+
+### Secondly, add the missing ```Reward Promotion``` campaign:
+- Change X-App-Id to your Application ID
+- Change X-App-Token to your Secret Key
+- Replace the ```/id/``` in each ```tier``` with previously saved ```id``` of the validation_rules
 
 ```
 curl --location --request POST 'https://api.voucherify.io/v1/campaigns' \
@@ -234,6 +242,8 @@ curl --location --request POST 'https://api.voucherify.io/v1/campaigns' \
   }
 }'
 ```
+
+### Finally, check if your campaign has been created on your Voucherify account.
 
 ```In this example applying coupons is not possible.```
 
