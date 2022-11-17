@@ -1,7 +1,7 @@
 import express from "express";
 import { addStackingPromotionRoutes } from "./stacking-promotions/server.js";
-import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "./voucher-code-redemption/server.js";
-import { accessTotieredPromotionsApp, attachEndpointsTieredCartPromotions } from "./tiered-cart-promotions/server.js";
+import { addEndpointsVoucherCodeRedemption } from "./voucher-code-redemption/server.js";
+import { addEndpointsTieredCartPromotions } from "./tiered-cart-promotions/server.js";
 import { fileURLToPath } from "url";
 import "dotenv/config";
 import pkg from "@voucherify/sdk";
@@ -67,9 +67,5 @@ app.listen(port, () => {
 });
 
 addStackingPromotionRoutes(app, client);
-
-accessToVoucherCodeRedemptionApp(app);
-attachEndpointsVoucherCodeRedemption(app, client);
-
-accessTotieredPromotionsApp(app);
-attachEndpointsTieredCartPromotions(app, client);
+addEndpointsVoucherCodeRedemption(app, client);
+addEndpointsTieredCartPromotions(app, client);

@@ -5,16 +5,14 @@ import express from "express";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const accessTotieredPromotionsApp = app => {
-    app.use("/tiered-cart-promotions", express.static(path.join(__dirname, "./public")));
-    app.use("/images", express.static(path.join(__dirname, "./public/images")));
-};
-
 const customer = {
     "source_id": "test_customer_id_1"
 };
 
-export const attachEndpointsTieredCartPromotions = (app, client) => {
+export const addEndpointsTieredCartPromotions = (app, client) => {
+    app.use("/tiered-cart-promotions", express.static(path.join(__dirname, "./public")));
+    app.use("/images", express.static(path.join(__dirname, "./public/images")));
+
     app.get("/tiered-cart-promotions/default-items", (req, res) => {
         return res.status(200).send(defaultItems);
     });
@@ -31,16 +29,14 @@ export const attachEndpointsTieredCartPromotions = (app, client) => {
         const products = req.body.items;
         const rewards = req.body.rewards;
         const items = mapInputIntoKnownProducts(products);
-        const rewardsStackableArray = {
+        const redeemStackableParams = {
             order: {
-                amount: null
+                amount: calculateCartTotalAmount(items)
             },
-            redeemables: []
+            redeemables: filterRewardsToRedeem(rewards)
         };
-        rewardsStackableArray.order.amount = calculateCartTotalAmount(items);
-        rewardsStackableArray.redeemables = filterRewardsToRedeem(rewards);
 
-        const { redemptions } = await client.redemptions.redeemStackable(rewardsStackableArray);
+        const { redemptions } = await client.redemptions.redeemStackable(redeemStackableParams);
         if (!redemptions.length) {
             return res.status(400).send({
                 status : "error",
