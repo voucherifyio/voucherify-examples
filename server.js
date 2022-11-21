@@ -51,6 +51,7 @@ Visit https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-
 for getting instructions on how to create the missing campaign.
 */
 
+
 const checkCampaign = async () => {
   try {
     await client.campaigns.get("Reward Promotion");
@@ -58,13 +59,13 @@ const checkCampaign = async () => {
     if (error.code === 404) {
       try {
         createMissingCampaign(client);
+        console.log("The Reward Campaign was successfully created.");
       }
       catch (error) {
         const msg = "The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly. \r\nPlease create a 'Reward Promotion' campaign first. \r\nYou can check the details by visiting: https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign";
         throw new Error(msg);
       }
     }
-    // throw new Error(error);
   }
 }
 
