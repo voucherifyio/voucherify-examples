@@ -55,6 +55,8 @@ npm run start / npm run dev || yarn start / yarn run dev
 
 ## Creating a "Reward Promotion" campaign<a id="creating-campaign"></a>
 
+The application should automatically add the missing campaign "Reward Promotion", but if there is an error, you can add it manually.
+
 ### First of all, it is required to add missing ```validation_rules```:
 - Change X-App-Id to your Application ID.
 - Change X-App-Token to your Secret Key.
