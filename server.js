@@ -46,11 +46,10 @@ const checkCredentials = async () => {
 /*
 Important!
 The 'Reward Promotion' campaign is required for this project to work properly.
- if it doesn't exist you will see an error in the console.
+If it doesn't exist you will see an error in the console.
 Visit https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign 
 for getting instructions on how to create the missing campaign.
 */
-
 
 const checkCampaign = async () => {
   try {
@@ -66,6 +65,7 @@ const checkCampaign = async () => {
         throw new Error(msg);
       }
     }
+    throw new Error(error);
   }
 }
 
