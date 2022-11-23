@@ -57,13 +57,14 @@ const checkCampaign = async () => {
   } catch (error) {
     if (error.code === 404) {
       try {
-        addMissingCampaign(client);
+        await addMissingCampaign(client);
       }
       catch (error) {
         const msg = `The 'Reward Promotion' campaign not found.
-        The 'missing-campaign.js' is the script that should automatically create this campaign when the application starts (createMissingCampaign() function). 
+        The 'add-missing-campaign.js' is the script that should automatically create this campaign when the application starts (createMissingCampaign() function). 
         If the script doesn't work you can check the details by visiting: \r\nhttps://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign,
         or you can get additional support here: \r\nhttps://github.com/voucherifyio/voucherify-examples/tree/main#get-support- `;
+        console.error(error);
         throw new Error(msg);
       }
     }

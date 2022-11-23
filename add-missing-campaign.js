@@ -192,8 +192,13 @@ export const addMissingCampaign = async (client) => {
             client.validationRules.create(thirdValidationRule),
         ])
         const rewardPromotion = createRewardPromotionObject(validationRules[0].id, validationRules[1].id, validationRules[2].id);
-        const response = await client.campaigns.create(rewardPromotion);
-        console.log("The Reward Campaign was successfully created.");
+        
+        try {
+            const response = await client.campaigns.create(rewardPromotion);
+            console.log("The Reward Campaign was successfully created.");
+        } catch (error) {
+            throw new Error(error);
+        }
     }
     await addValidationRulesAndCampaign();
 }

@@ -53,7 +53,7 @@ npm run start / npm run dev || yarn start / yarn run dev
 ```
 7. Go to [http://localhost:3000](http://localhost:3000/) in your browser.
 
-Note: The application should automatically add the missing campaign "Reward Promotion" by using script called "missing-campaign.js", so there is no need to add it manually.
+Note: The application should automatically add the missing campaign ```Reward Promotion``` by using script called ```add-missing-campaign.js```, so there is no need to add it manually.
 
 ## Get support <a id="support"></a>
 

@@ -21,11 +21,11 @@ Live demo on:<br>
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
 
 ## A "Reward Promotion" campaign<a id="creating-campaign"></a>
-The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Rewards promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment the campaign is created automatically when the application starts, by using ```missing-campaign.js``` script.
+The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Reward promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment the campaign is created automatically when the application starts, by using ```add-missing-campaign.js``` script.
 
 <img width="1189" alt="Screenshot 2022-08-03 at 14 52 39" src="https://user-images.githubusercontent.com/77458595/182775604-db10d656-f9f8-410f-ad74-6aa746ba4727.png">
 
-In case you want to add it manually, instead of using ```missing-campaign.js``` script, below are the steps.
+In case you want to add it manually, instead of using ```-add-missing-campaign.js``` script, below are the steps.
 
 ##### First of all, it is required to add missing ```validation_rules```:
 - Change X-App-Id to your Application ID.
