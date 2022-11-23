@@ -187,9 +187,9 @@ export const createMissingCampaign = async (client) => {
 
     const createRewardPromotion = async () => {
         await Promise.all([
-            await client.validationRules.create(firstValidationRule),
-            await client.validationRules.create(secondValidationRule),
-            await client.validationRules.create(thirdValidationRule)
+              client.validationRules.create(firstValidationRule),
+              client.validationRules.create(secondValidationRule),
+              client.validationRules.create(thirdValidationRule)
         ])
             .then(([firstPromise, secondPromise, thirdPromise]) => {
                 const rewardPromotion = createRewardPromotionObject(firstPromise.id, secondPromise.id, thirdPromise.id);
@@ -199,7 +199,23 @@ export const createMissingCampaign = async (client) => {
                 }
             })
     }
-    await createRewardPromotion();
+ 
+    const test = async () => {
+        const validationRules = await Promise.all([
+            client.validationRules.create(firstValidationRule),
+            client.validationRules.create(secondValidationRule),
+            client.validationRules.create(thirdValidationRule),
+          ])
+          
+          const rewardPromotion = createRewardPromotionObject(validationRules[0].id, validationRules[1].id, validationRules[2].id);
+          
+          const createCampaignResponse = await client.campaigns.create(rewardPromotion);
+          
+          if (createCampaignResponse.code !== 200) {
+            return new Error;
+          }
+    }
+    await test();
 }
 
 

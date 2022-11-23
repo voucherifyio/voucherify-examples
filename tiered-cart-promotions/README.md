@@ -20,13 +20,14 @@ Live demo on:<br>
 [<img src="https://user-images.githubusercontent.com/77458595/182553794-59bf31fe-91b9-4ebe-b468-d466b0bb73b2.svg" width="100px" />](https://replit.com/@Voucherify/Voucherify-Examples?v=1#README.md)
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
 
-The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Rewards promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment you can add your own [reward campaign](https://support.voucherify.io/article/519-create-cart-level-promotions). If you want your campaign to work with this example you have to give the same campaign name and properties of promotion tiers like below.
+## A "Reward Promotion" campaign<a id="creating-campaign"></a>
+The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Rewards promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment the campaign is created automatically when the application starts, by using ```missing-campaign.js``` script.
 
 <img width="1189" alt="Screenshot 2022-08-03 at 14 52 39" src="https://user-images.githubusercontent.com/77458595/182775604-db10d656-f9f8-410f-ad74-6aa746ba4727.png">
 
-## Creating a "Reward Promotion" campaign<a id="creating-campaign"></a>
+In case you want to add it manually, instead of using ```missing-campaign.js``` script, below are the steps.
 
-### First of all, it is required to add missing ```validation_rules```:
+##### First of all, it is required to add missing ```validation_rules```:
 - Change X-App-Id to your Application ID.
 - Change X-App-Token to your Secret Key.
 - Keep the returned validation_rule id after executing each request. It will be required for the main request.
@@ -151,7 +152,7 @@ curl --location --request POST 'https://api.voucherify.io/v1/validation-rules' \
 }'
 ```
 
-### Secondly, add the missing ```Reward Promotion``` campaign:
+##### Secondly, add the missing ```Reward Promotion``` campaign:
 - Change X-App-Id to your Application ID.
 - Change X-App-Token to your Secret Key.
 - Replace the ```/id/``` in each ```tier``` with previously saved ```id``` of the validation_rules

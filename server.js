@@ -61,11 +61,14 @@ const checkCampaign = async () => {
         console.log("The Reward Campaign was successfully created.");
       }
       catch (error) {
-        const msg = "The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly. \r\nPlease create a 'Reward Promotion' campaign first. \r\nYou can check the details by visiting: https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign";
+        const msg = `The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly.
+        \r\nPlease create a 'Reward Promotion' campaign first. 
+        \r\nThe 'missing-campaign.js' is the script that should automatically create this campaign when the application starts (createMissingCampaign() function). 
+        \r\nIf the script doesn't work you can check the details by visiting: https://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign
+        or you can get additional support here: https://github.com/voucherifyio/voucherify-examples/tree/main#get-support- `;
         throw new Error(msg);
       }
     }
-    throw new Error(error);
   }
 }
 
