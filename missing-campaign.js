@@ -185,34 +185,18 @@ export const createMissingCampaign = async (client) => {
         "context_type": "campaign.promotion.discount.apply_to_order"
     }
 
-    // const createRewardPromotion = async () => {
-    //     await Promise.all([
-    //           client.validationRules.create(firstValidationRule),
-    //           client.validationRules.create(secondValidationRule),
-    //           client.validationRules.create(thirdValidationRule)
-    //     ])
-    //         .then(([firstPromise, secondPromise, thirdPromise]) => {
-    //             const rewardPromotion = createRewardPromotionObject(firstPromise.id, secondPromise.id, thirdPromise.id);
-    //             const response = client.campaigns.create(rewardPromotion);
-    //             if (response.code !== 200) {
-    //                 return new Error;
-    //             }
-    //         })
-    // }
- 
     const createValidationRulesAndCampaign = async () => {
         const validationRules = await Promise.all([
             client.validationRules.create(firstValidationRule),
             client.validationRules.create(secondValidationRule),
             client.validationRules.create(thirdValidationRule),
-          ])
-          const rewardPromotion = createRewardPromotionObject(validationRules[0].id, validationRules[1].id, validationRules[2].id);
-
-          const createCampaignResponse = await client.campaigns.create(rewardPromotion);
-          console.log("The Reward Campaign was successfully created.");
-          
+        ])
+        const rewardPromotion = createRewardPromotionObject(validationRules[0].id, validationRules[1].id, validationRules[2].id);
+        const response = await client.campaigns.create(rewardPromotion);
+        console.log("The Reward Campaign was successfully created.");
     }
     await createValidationRulesAndCampaign();
 }
+
 
 
