@@ -1,4 +1,4 @@
-export const createMissingCampaign = async (client) => {
+export const addMissingCampaign = async (client) => {
 
     const createRewardPromotionObject = (firstValidationRule, secondValidationRule, thirdValidationRule) => {
         return {
@@ -185,7 +185,7 @@ export const createMissingCampaign = async (client) => {
         "context_type": "campaign.promotion.discount.apply_to_order"
     }
 
-    const createValidationRulesAndCampaign = async () => {
+    const addValidationRulesAndCampaign = async () => {
         const validationRules = await Promise.all([
             client.validationRules.create(firstValidationRule),
             client.validationRules.create(secondValidationRule),
@@ -195,7 +195,7 @@ export const createMissingCampaign = async (client) => {
         const response = await client.campaigns.create(rewardPromotion);
         console.log("The Reward Campaign was successfully created.");
     }
-    await createValidationRulesAndCampaign();
+    await addValidationRulesAndCampaign();
 }
 
 

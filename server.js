@@ -7,7 +7,7 @@ import "dotenv/config";
 import pkg from "@voucherify/sdk";
 import path from "path";
 import bodyParser from "body-parser";
-import { createMissingCampaign } from "./missing-campaign.js";
+import { addMissingCampaign } from "./add-missing-campaign.js";
 const { VoucherifyServerSide } = pkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,7 +57,7 @@ const checkCampaign = async () => {
   } catch (error) {
     if (error.code === 404) {
       try {
-        createMissingCampaign(client);
+        addMissingCampaign(client);
       }
       catch (error) {
         const msg = `The 'Reward Promotion' campaign not found.
