@@ -85,7 +85,7 @@ export const createMissingCampaign = async (client) => {
 
     const firstValidationRule = {
         "id": null,
-        "name": "Business Validation Rule - Reward Promotion Tier 1",
+        "name": "Validation Rule - Reward Promotion Tier 1",
         "rules": {
             "1": {
                 "name": "order.amount",
@@ -119,7 +119,7 @@ export const createMissingCampaign = async (client) => {
 
     const secondValidationRule = {
         "id": null,
-        "name": "Business Validation Rule - Reward Promotion Tier 2",
+        "name": "Validation Rule - Reward Promotion Tier 2",
         "rules": {
             "1": {
                 "name": "order.amount",
@@ -153,7 +153,7 @@ export const createMissingCampaign = async (client) => {
 
     const thirdValidationRule = {
         "id": null,
-        "name": "Business Validation Rule - Reward Promotion Tier 3",
+        "name": "Validation Rule - Reward Promotion Tier 3",
         "rules": {
             "1": {
                 "name": "order.amount",
@@ -185,37 +185,34 @@ export const createMissingCampaign = async (client) => {
         "context_type": "campaign.promotion.discount.apply_to_order"
     }
 
-    const createRewardPromotion = async () => {
-        await Promise.all([
-              client.validationRules.create(firstValidationRule),
-              client.validationRules.create(secondValidationRule),
-              client.validationRules.create(thirdValidationRule)
-        ])
-            .then(([firstPromise, secondPromise, thirdPromise]) => {
-                const rewardPromotion = createRewardPromotionObject(firstPromise.id, secondPromise.id, thirdPromise.id);
-                const response = client.campaigns.create(rewardPromotion);
-                if (response.code !== 200) {
-                    return new Error;
-                }
-            })
-    }
+    // const createRewardPromotion = async () => {
+    //     await Promise.all([
+    //           client.validationRules.create(firstValidationRule),
+    //           client.validationRules.create(secondValidationRule),
+    //           client.validationRules.create(thirdValidationRule)
+    //     ])
+    //         .then(([firstPromise, secondPromise, thirdPromise]) => {
+    //             const rewardPromotion = createRewardPromotionObject(firstPromise.id, secondPromise.id, thirdPromise.id);
+    //             const response = client.campaigns.create(rewardPromotion);
+    //             if (response.code !== 200) {
+    //                 return new Error;
+    //             }
+    //         })
+    // }
  
-    const test = async () => {
+    const createValidationRulesAndCampaign = async () => {
         const validationRules = await Promise.all([
             client.validationRules.create(firstValidationRule),
             client.validationRules.create(secondValidationRule),
             client.validationRules.create(thirdValidationRule),
           ])
-          
           const rewardPromotion = createRewardPromotionObject(validationRules[0].id, validationRules[1].id, validationRules[2].id);
-          
+
           const createCampaignResponse = await client.campaigns.create(rewardPromotion);
+          console.log("The Reward Campaign was successfully created.");
           
-          if (createCampaignResponse.code !== 200) {
-            return new Error;
-          }
     }
-    await test();
+    await createValidationRulesAndCampaign();
 }
 
 

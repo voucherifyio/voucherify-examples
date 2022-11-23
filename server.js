@@ -58,7 +58,6 @@ const checkCampaign = async () => {
     if (error.code === 404) {
       try {
         createMissingCampaign(client);
-        console.log("The Reward Campaign was successfully created.");
       }
       catch (error) {
         const msg = `The 'Reward Promotion' campaign not found. This campaign is required for 'tiered-cart-promotion' to work properly.
