@@ -11,7 +11,7 @@ import {
 
 const state = {
     products: [],
-    rewards: []
+    rewards : []
 };
 
 const checkoutButton = queryCheckoutButton();
@@ -57,9 +57,9 @@ const validatePromotion = async products => {
     state.rewards = [];
     const { items } = filterAndReduceProducts(products);
     const response = await fetch("/tiered-cart-promotions/validate-promotion", {
-        method: "POST",
+        method : "POST",
         headers: {
-            "Accept": "application/json",
+            "Accept"      : "application/json",
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ items })
@@ -71,11 +71,11 @@ const validatePromotion = async products => {
     return {
         rewards: data.map(reward => {
             return {
-                banner: reward.banner,
+                banner   : reward.banner,
                 hierarchy: reward.hierarchy,
-                discount: reward.order.total_applied_discount_amount,
-                object: reward.object,
-                id: reward.id
+                discount : reward.order.total_applied_discount_amount,
+                object   : reward.object,
+                id       : reward.id
             };
         })
     };

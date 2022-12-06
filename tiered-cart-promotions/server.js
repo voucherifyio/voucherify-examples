@@ -23,7 +23,7 @@ export const addEndpointsTieredCartPromotions = (app, client) => {
         const { promotions } = await client.promotions.validate({ customer: customer, order: { amount: calculateCartTotalAmount(items), items: items } });
         const rewardPromotion = promotions.filter(campaign => campaign.name.startsWith("Reward Promotion"));
         return res.status(200).send(rewardPromotion);
-    }));  
+    }));
 
     app.post("/tiered-cart-promotions/redeem-stackable", asyncHandler(async (req, res) => {
         const products = req.body.items;
