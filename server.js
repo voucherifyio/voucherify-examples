@@ -49,7 +49,7 @@ const checkCampaign = async () => {
         if (error.code === 404) {
                 const msg = `The 'Reward Promotion' campaign not found.
         Please run the command 'node ./add-missing-campaign.js' in the terminal to create the missing campaign.
-        When you get a message that the campaign has been created successfully you can run the main script again.
+        When you receive a message that the campaign has been successfully created you can run the main script again.
         You can get additional support here: https://github.com/voucherifyio/voucherify-examples/tree/main#get-support- `;
                 console.error(msg);
         }
