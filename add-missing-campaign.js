@@ -1,3 +1,5 @@
+import { client } from './server.js';
+
 const createRewardPromotionObject = (firstValidationRuleId, secondValidationRuleId, thirdValidationRuleId) => {
     return {
         "name"                       : "Reward Promotion",
@@ -183,7 +185,8 @@ const thirdValidationRule = {
     "context_type": "campaign.promotion.discount.apply_to_order"
 };
 
-export const addMissingCampaign = async client => {
+
+ export const addMissingCampaign = async (client) => {
 
     const addValidationRulesAndCampaign = async () => {
         const validationRules = await Promise.all([
@@ -194,7 +197,7 @@ export const addMissingCampaign = async client => {
         const rewardPromotion = createRewardPromotionObject(validationRules[0].id, validationRules[1].id, validationRules[2].id);
 
         try {
-            const response = await client.campaigns.create(rewardPromotion);
+            await client.campaigns.create(rewardPromotion);
             console.log("The Reward Promotion was successfully created.");
         } catch (error) {
             throw new Error(error);
@@ -202,6 +205,8 @@ export const addMissingCampaign = async client => {
     };
     await addValidationRulesAndCampaign();
 };
+
+addMissingCampaign(client);
 
 
 

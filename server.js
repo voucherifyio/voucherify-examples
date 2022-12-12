@@ -7,7 +7,6 @@ import "dotenv/config";
 import pkg from "@voucherify/sdk";
 import path from "path";
 import bodyParser from "body-parser";
-import { addMissingCampaign } from "./add-missing-campaign.js";
 const { VoucherifyServerSide } = pkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,17 +47,11 @@ const checkCampaign = async () => {
         await client.campaigns.get("Reward Promotion");
     } catch (error) {
         if (error.code === 404) {
-            try {
-                await addMissingCampaign(client);
-            }
-            catch (error) {
                 const msg = `The 'Reward Promotion' campaign not found.
-        The 'add-missing-campaign.js' is the script that should automatically create this campaign when the application starts (createMissingCampaign() function). 
-        If the script doesn't work you can check the details by visiting: \r\nhttps://github.com/voucherifyio/voucherify-examples/tree/main/tiered-cart-promotions#creating-a-reward-promotion-campaign,
-        or you can get additional support here: \r\nhttps://github.com/voucherifyio/voucherify-examples/tree/main#get-support- `;
-                console.error(error);
-                throw new Error(msg);
-            }
+        Please run the command 'node ./add-missing-campaign.js' in the terminal to create the missing campaign.
+        When you get a message that the campaign has been created successfully you can run the main script again.
+        You can get additional support here: https://github.com/voucherifyio/voucherify-examples/tree/main#get-support- `;
+                console.error(msg);
         }
     }
 };
