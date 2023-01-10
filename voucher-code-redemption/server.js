@@ -5,11 +5,9 @@ import express from "express";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const accessToVoucherCodeRedemptionApp = app => {
+export const addEndpointsVoucherCodeRedemption = (app, client) => {
     app.use("/voucher-code-redemption", express.static(path.join(__dirname, "./public")));
-};
 
-export const attachEndpointsVoucherCodeRedemption = (app, client) => {
     app.get("/voucher-code-redemption/get-default-items", (req, res) => {
         return res.status(200).send(defaultItems);
     });

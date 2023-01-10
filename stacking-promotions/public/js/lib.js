@@ -151,7 +151,7 @@ export const filterAndReduceProducts = products => {
 };
 
 export const getDefaultItemsNameAndPrice = async () => {
-    const response = await fetch("/stacking-promotions/default-items", {
+    const response = await fetch("/stacking-promotions/default-cart-items", {
         method : "GET",
         headers: {
             "Accept"      : "application/json",
