@@ -11,6 +11,8 @@ const { VoucherifyServerSide } = pkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
+// const { EOL } = require("os");
+import { EOL } from "os";
 
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
@@ -47,8 +49,13 @@ const checkCampaign = async () => {
         await client.campaigns.get("Reward Promotion");
     } catch (error) {
         if (error.code === 404) {
-                const msg = "The 'Reward Promotion' campaign not found. \r\nPlease run the command 'node ./add-missing-campaign.js' in the terminal to create the missing campaign. \r\nWhen you receive a message that the campaign has been successfully created you can run the main script again. \r\nYou can get additional support here: https://github.com/voucherifyio/voucherify-examples/tree/main#get-support- \r\n";
-                console.error(msg);
+            const msgs = [
+                "The 'Reward Promotion' campaign not found.",
+                "Please run the command 'node ./add-missing-campaign.js' in the terminal to create the missing campaign.",
+                "When you receive a message that the campaign has been successfully created you can run the main script again.",
+                "You can get additional support here: https://github.com/voucherifyio/voucherify-examples/tree/main#get-support"
+            ];
+            console.log(msgs.join(EOL));
         }
     }
 };
