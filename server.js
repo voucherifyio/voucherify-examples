@@ -1,7 +1,7 @@
 import express from "express";
-import { accessToStackingPromotionsApp, attachEndpointsStackingPromotions } from "./stacking-promotions/server.js";
-import { accessToVoucherCodeRedemptionApp, attachEndpointsVoucherCodeRedemption } from "./voucher-code-redemption/server.js";
-import { accessTotieredPromotionsApp, attachEndpointsTieredCartPromotions } from "./tiered-cart-promotions/server.js";
+import { addStackingPromotionRoutes } from "./stacking-promotions/server.js";
+import { addEndpointsVoucherCodeRedemption } from "./voucher-code-redemption/server.js";
+import { addEndpointsTieredCartPromotions } from "./tiered-cart-promotions/server.js";
 import { fileURLToPath } from "url";
 import "dotenv/config";
 import pkg from "@voucherify/sdk";
@@ -11,6 +11,8 @@ const { VoucherifyServerSide } = pkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
+// const { EOL } = require("os");
+import { EOL } from "os";
 
 export const client = VoucherifyServerSide({
     applicationId: `${process.env.VOUCHERIFY_APP_ID}`,
@@ -41,7 +43,25 @@ const checkCredentials = async () => {
         throw new Error(error);
     }
 };
+
+const checkCampaign = async () => {
+    try {
+        await client.campaigns.get("Reward Promotion");
+    } catch (error) {
+        if (error.code === 404) {
+            const msgs = [
+                "The 'Reward Promotion' campaign not found.",
+                "Please run the command 'node ./add-missing-campaign.js' in the terminal to create the missing campaign.",
+                "When you receive a message that the campaign has been successfully created you can run the main script again.",
+                "You can get additional support here: https://github.com/voucherifyio/voucherify-examples/tree/main#get-support"
+            ];
+            console.log(msgs.join(EOL));
+        }
+    }
+};
+
 checkCredentials();
+checkCampaign();
 
 const port = process.env.PORT || 8080;
 
@@ -49,11 +69,6 @@ app.listen(port, () => {
     console.log(`Hot beans app listening on port ${port}`);
 });
 
-accessToStackingPromotionsApp(app);
-attachEndpointsStackingPromotions(app, client);
-
-accessToVoucherCodeRedemptionApp(app);
-attachEndpointsVoucherCodeRedemption(app, client);
-
-accessTotieredPromotionsApp(app);
-attachEndpointsTieredCartPromotions(app, client);
+addStackingPromotionRoutes(app, client);
+addEndpointsVoucherCodeRedemption(app, client);
+addEndpointsTieredCartPromotions(app, client);

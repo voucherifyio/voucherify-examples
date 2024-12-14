@@ -20,7 +20,8 @@ Live demo on:<br>
 [<img src="https://user-images.githubusercontent.com/77458595/182553794-59bf31fe-91b9-4ebe-b468-d466b0bb73b2.svg" width="100px" />](https://replit.com/@Voucherify/Voucherify-Examples?v=1#README.md)
 ![](https://github.com/voucherify-samples/voucher-code-redemption/blob/main/free_shipping.gif)
 
-The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Rewards promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment you can add your own [reward campaign](https://support.voucherify.io/article/519-create-cart-level-promotions). If you want your campaign to work with this example you have to give the same campaign name and properties of promotion tiers like below.
+## A "Reward Promotion" campaign<a id="creating-campaign"></a>
+The demo is running with a [Sandbox project](https://docs.voucherify.io/docs/testing). Sandbox comes with test a campaign "Reward promotion" - ```will be added soon with the creation of an account on Voucherify``` which you will be able to use in your example. At this moment the campaign is created automatically when the application starts, by using ```add-missing-campaign.js``` script.
 
 <img width="1189" alt="Screenshot 2022-08-03 at 14 52 39" src="https://user-images.githubusercontent.com/77458595/182775604-db10d656-f9f8-410f-ad74-6aa746ba4727.png">
 

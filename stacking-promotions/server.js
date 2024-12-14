@@ -5,25 +5,15 @@ import express from "express";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const accessToStackingPromotionsApp = app => {
-    app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
-};
-
 const customer = {
     "source_id": "test_customer_id_1"
 };
 
-const promotionStackableObj = {
-    order: {
-        amount: null,
-    },
-    customer   : customer,
-    redeemables: []
-};
+export const addStackingPromotionRoutes = (app, client) => {
+    app.use("/stacking-promotions", express.static(path.join(__dirname, "./public")));
 
-export const attachEndpointsStackingPromotions = (app, client) => {
-    app.get("/stacking-promotions/default-items", (req, res) => {
-        return res.status(200).send(defaultItems);
+    app.get("/stacking-promotions/default-cart-items", (req, res) => {
+        return res.status(200).send(defaultCartItems);
     });
 
     app.post("/stacking-promotions/validate-promotion", asyncHandler(async (req, res) => {
@@ -42,17 +32,23 @@ export const attachEndpointsStackingPromotions = (app, client) => {
         const vouchersArray = req.body.vouchersArray;
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
+
+        const validateStackableParams = {
+            order: {
+                amount: calculateCartTotalAmount(items),
+            },
+            customer   : customer,
+            redeemables: removeDuplicatedPromoObjects(vouchersArray)
+        };
+
         if (!vouchersArray) {
             return res.send({
                 message: "Voucher code is required"
             });
         }
-        promotionStackableObj.order.amount = calculateCartTotalAmount(items);
-        promotionStackableObj.redeemables = vouchersArray;
-        promotionStackableObj.redeemables = removeDuplicatedPromoObjects(promotionStackableObj.redeemables);
 
         try {
-            const { redeemables, order } = await client.validations.validateStackable(promotionStackableObj);
+            const { redeemables, order } = await client.validations.validateStackable(validateStackableParams);
             const [ voucher ] = redeemables.filter(voucher => voucher.status === "INAPPLICABLE");
 
             if (voucher?.result?.error) {
@@ -79,11 +75,16 @@ export const attachEndpointsStackingPromotions = (app, client) => {
         const products = req.body.items;
         const items = mapInputIntoKnownProducts(products);
 
-        promotionStackableObj.order.amount = calculateCartTotalAmount(items);
-        promotionStackableObj.redeemables = vouchersArray;
+        const redeemStackableParams = {
+            order: {
+                amount: calculateCartTotalAmount(items),
+            },
+            customer   : customer,
+            redeemables: vouchersArray
+        };
 
         try {
-            await client.redemptions.redeemStackable(promotionStackableObj);
+            await client.redemptions.redeemStackable(redeemStackableParams);
             return res.status(200).send({
                 status : "success",
                 message: "Voucher redeemed",
@@ -97,9 +98,10 @@ export const attachEndpointsStackingPromotions = (app, client) => {
     }));
 };
 
+
 const mapInputIntoKnownProducts = requestedCart => {
     return requestedCart.map(requestedItem => {
-        const item = defaultItems.find(item => requestedItem?.id && item.id === requestedItem.id);
+        const item = defaultCartItems.find(item => requestedItem?.id && item.id === requestedItem.id);
         if (!item) {
             return false;
         }
@@ -113,7 +115,7 @@ const removeDuplicatedPromoObjects = array => {
     return array.filter((value, index, self) => index === self.findIndex(t => (t.id === value.id)));
 };
 
-const defaultItems = [
+const defaultCartItems = [
     {
         productName       : "Johan & Nystrom Caravan",
         productDescription: "20 oz bag",
